@@ -1,0 +1,49 @@
+<div class="container mt-5">
+  <h2>Empréstimo</h2>
+  <hr />
+  <div class="row mt-4">
+    <div class="col-md-6">
+      <h4>Selecionar o cliente</h4>
+      <div class="input-group mb-3">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Pesquisar cliente"
+          [(ngModel)]="consultaCliente"
+        />
+        <button
+          (click)="abrirConsultaCliente()"
+          class="btn btn-outline-secondary"
+          type="button"
+        >
+          <i class="fa fa-search"></i>
+        </button>
+      </div>
+      <app-info-cliente
+        [exibeLixeira]="true"
+        [cliente]="cliente"
+      ></app-info-cliente>
+    </div>
+    <div class="col-md-6 mb-4">
+      <h4>Selecionar Livros</h4>
+      <div class="input-group mb-3">
+        <input type="text" class="form-control" placeholder="Pesquisar livro" />
+        <button class="btn btn-outline-secondary" type="button">
+          <i class="fa fa-search"></i>
+        </button>
+      </div>
+      <div class="scrollable">
+        <app-info-livro
+          *ngFor="let livro of livros"
+          [livro]="livro"
+        ></app-info-livro>
+      </div>
+    </div>
+  </div>
+  <div class="row mt-4 mb-4">
+    <div class="col-12">
+      <button class="btn btn-success me-2">Confirmar empréstimo</button>
+      <button class="btn btn-secondary">Cancelar</button>
+    </div>
+  </div>
+</div>
