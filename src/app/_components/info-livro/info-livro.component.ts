@@ -8,4 +8,6 @@ import { Livro } from '../../_models/Livro';
 })
 export class InfoLivroComponent {
   @Input() livro?: Livro;
+  @Input() exibeLixeira: boolean = false;
+  @Input() exibeAdd: boolean = false;
 }

@@ -17,6 +17,7 @@ import { InfoLivroComponent } from './_components/info-livro/info-livro.componen
 import { ConsultaClientesComponent } from './_modals/consulta-clientes/consulta-clientes.component';
 import { FormsModule } from '@angular/forms';
 import { InfoClienteComponent } from './_components/info-cliente/info-cliente.component';
+import { ConsultaLivrosComponent } from './_modals/consulta-livros/consulta-livros.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { InfoClienteComponent } from './_components/info-cliente/info-cliente.co
     InfoLivroComponent,
     ConsultaClientesComponent,
     InfoClienteComponent,
+    ConsultaLivrosComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, SharedModule, FormsModule],
   providers: [],

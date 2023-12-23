@@ -3,6 +3,7 @@ import { Livro } from '../../_models/Livro';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { ConsultaClientesComponent } from '../../_modals/consulta-clientes/consulta-clientes.component';
 import { Cliente } from '../../_models/Cliente';
+import { ConsultaLivrosComponent } from '../../_modals/consulta-livros/consulta-livros.component';
 
 @Component({
   selector: 'app-emprestimo',
@@ -39,6 +40,7 @@ export class EmprestimoComponent {
 
   bsModalRef?: BsModalRef;
   consultaCliente: string = '';
+  consultaLivro: string = '';
 
   cliente: Cliente = {
     Id: 1,
@@ -59,6 +61,15 @@ export class EmprestimoComponent {
       consultaCliente: this.consultaCliente,
     };
     this.modalService.show(ConsultaClientesComponent, {
+      initialState,
+    });
+  }
+
+  abrirConsultaLivro() {
+    const initialState = {
+      consultaLivro: this.consultaLivro,
+    };
+    this.modalService.show(ConsultaLivrosComponent, {
       initialState,
     });
   }
