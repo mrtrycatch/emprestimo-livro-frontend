@@ -1,7 +1,7 @@
 <div class="container mt-5">
-  <h2>Novo cliente</h2>
+  <h2>{{ cliente ? "Alterar" : "Novo" }} cliente</h2>
   <hr />
-  <form>
+  <form [formGroup]="clienteForms">
     <div class="row g-3">
       <div class="col-md-4">
         <label for="cpf" class="form-label">CPF</label>
@@ -10,6 +10,7 @@
           id="cpf"
           class="form-control"
           placeholder="Digite o CPF"
+          formControlName="CliCPF"
         />
       </div>
       <div class="col-md-8">
@@ -19,6 +20,7 @@
           id="nome"
           class="form-control"
           placeholder="Digite o nome"
+          formControlName="CliNome"
         />
       </div>
       <div class="col-md-6">
@@ -28,6 +30,7 @@
           id="endereco"
           class="form-control"
           placeholder="Digite o endereço"
+          formControlName="CliEndereco"
         />
       </div>
       <div class="col-md-2">
@@ -37,6 +40,7 @@
           id="numero"
           class="form-control"
           placeholder="Digite o número"
+          formControlName="CliNumero"
         />
       </div>
       <div class="col-md-4">
@@ -46,6 +50,7 @@
           id="cidade"
           class="form-control"
           placeholder="Nome da cidade"
+          formControlName="CliCidade"
         />
       </div>
       <div class="col-md-4">
@@ -55,6 +60,7 @@
           id="bairro"
           class="form-control"
           placeholder="Nome do bairro"
+          formControlName="CliBairro"
         />
       </div>
       <div class="col-md-4">
@@ -64,6 +70,7 @@
           id="telefoneFixo"
           class="form-control"
           placeholder="Digite o telefone fixo"
+          formControlName="CliTelefoneFixo"
         />
       </div>
       <div class="col-md-4">
@@ -73,11 +80,14 @@
           id="telefoneCelular"
           class="form-control"
           placeholder="Digite o telefone celular"
+          formControlName="CliTelefoneCelular"
         />
       </div>
     </div>
     <div class="col-md-12 mt-3">
-      <button class="btn btn-success">Incluir</button>
+      <button class="btn btn-success">
+        {{ cliente ? "Alterar" : "Incluir" }}
+      </button>
     </div>
   </form>
 </div>

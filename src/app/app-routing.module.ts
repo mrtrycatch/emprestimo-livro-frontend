@@ -11,6 +11,7 @@ const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'cliente', component: ClientesComponent },
   { path: 'cliente/create', component: ClienteFormsComponent },
+  { path: 'cliente/put', component: ClienteFormsComponent },
   { path: 'livro', component: LivrosComponent },
   { path: 'livro/create', component: LivroFormsComponent },
   { path: 'emprestimo', component: EmprestimoComponent },

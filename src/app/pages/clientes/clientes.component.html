@@ -15,35 +15,18 @@
         </tr>
       </thead>
       <tbody>
-        <tr>
+        <tr *ngFor="let cliente of clientes">
           <td>
-            <button class="btn btn-sm btn-primary">
+            <button
+              (click)="alterarOuExcluirCliente(cliente)"
+              class="btn btn-sm btn-primary"
+            >
               <i class="fa fa-search"></i>
             </button>
           </td>
-          <td>11111111111</td>
-          <td>Vinicius</td>
-          <td>(11) 9 9999-9999</td>
-        </tr>
-        <tr>
-          <td>
-            <button class="btn btn-sm btn-primary">
-              <i class="fa fa-search"></i>
-            </button>
-          </td>
-          <td>11111111111</td>
-          <td>Vinicius</td>
-          <td>(11) 9 9999-9999</td>
-        </tr>
-        <tr>
-          <td>
-            <button class="btn btn-sm btn-primary">
-              <i class="fa fa-search"></i>
-            </button>
-          </td>
-          <td>11111111111</td>
-          <td>Vinicius</td>
-          <td>(11) 9 9999-9999</td>
+          <td>{{ cliente.CliCPF }}</td>
+          <td>{{ cliente.CliNome }}</td>
+          <td>{{ cliente.CliTelefoneCelular }}</td>
         </tr>
       </tbody>
     </table>

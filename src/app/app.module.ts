@@ -15,7 +15,7 @@ import { LivroFormsComponent } from './pages/livro-forms/livro-forms.component';
 import { EmprestimoComponent } from './pages/emprestimo/emprestimo.component';
 import { InfoLivroComponent } from './_components/info-livro/info-livro.component';
 import { ConsultaClientesComponent } from './_modals/consulta-clientes/consulta-clientes.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { InfoClienteComponent } from './_components/info-cliente/info-cliente.component';
 import { ConsultaLivrosComponent } from './_modals/consulta-livros/consulta-livros.component';
 
@@ -36,7 +36,13 @@ import { ConsultaLivrosComponent } from './_modals/consulta-livros/consulta-livr
     InfoClienteComponent,
     ConsultaLivrosComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, SharedModule, FormsModule],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    SharedModule,
+    FormsModule,
+    ReactiveFormsModule,
+  ],
   providers: [],
   bootstrap: [AppComponent],
 })
