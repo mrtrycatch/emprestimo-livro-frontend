@@ -1,0 +1,34 @@
+<div class="container mt-5">
+  <h2>Usuários</h2>
+  <hr />
+  <button routerLink="/usuario/create" class="btn btn-sm btn-primary">
+    <i class="fa fa-plus"></i> Novo Usuário
+  </button>
+  <div class="table-responsive">
+    <table class="table">
+      <thead>
+        <tr>
+          <th></th>
+          <th>Nome</th>
+          <th>E-mail</th>
+          <th>Administrador</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let usuario of usuarios">
+          <td>
+            <button
+              (click)="alterarUsuario(usuario)"
+              class="btn btn-sm btn-primary"
+            >
+              <i class="fa fa-search"></i>
+            </button>
+          </td>
+          <td>{{ usuario.nome }}</td>
+          <td>{{ usuario.email }}</td>
+          <td>{{ usuario.isAdmin ? "Sim" : "Não" }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

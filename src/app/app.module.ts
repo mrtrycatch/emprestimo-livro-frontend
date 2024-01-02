@@ -18,6 +18,9 @@ import { ConsultaClientesComponent } from './_modals/consulta-clientes/consulta-
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { InfoClienteComponent } from './_components/info-cliente/info-cliente.component';
 import { ConsultaLivrosComponent } from './_modals/consulta-livros/consulta-livros.component';
+import { LoginComponent } from './pages/login/login.component';
+import { UsuariosComponent } from './pages/usuarios/usuarios.component';
+import { UsuarioFormsComponent } from './pages/usuario-forms/usuario-forms.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +38,9 @@ import { ConsultaLivrosComponent } from './_modals/consulta-livros/consulta-livr
     ConsultaClientesComponent,
     InfoClienteComponent,
     ConsultaLivrosComponent,
+    LoginComponent,
+    UsuariosComponent,
+    UsuarioFormsComponent,
   ],
   imports: [
     BrowserModule,

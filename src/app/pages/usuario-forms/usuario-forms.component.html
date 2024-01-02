@@ -1,0 +1,54 @@
+<div class="container mt-5">
+  <h2>{{ usuario ? "Alterar" : "Novo" }} usuário</h2>
+  <hr />
+  <form [formGroup]="usuarioForms">
+    <div class="row g-3">
+      <div class="col-md-8">
+        <label for="nome" class="form-label">Nome</label>
+        <input
+          type="text"
+          id="nome"
+          class="form-control"
+          placeholder="Digite o nome do usuário"
+          formControlName="nome"
+        />
+      </div>
+      <div class="col-md-4">
+        <label for="email" class="form-label">E-mail</label>
+        <input
+          type="email"
+          id="email"
+          class="form-control"
+          placeholder="Digite o e-mail do usuário"
+          formControlName="email"
+        />
+      </div>
+      <div class="col-md-5">
+        <label for="password" class="form-label">Senha padrão</label>
+        <input
+          type="password"
+          id="password"
+          class="form-control"
+          placeholder="Digite a senha provisória do usuário"
+          formControlName="password"
+        />
+      </div>
+      <div class="col-md-4 d-flex flex-column justify-content-end">
+        <div class="form-check">
+          <label for="isAdmin" class="form-check-label"> Administrador </label>
+          <input
+            class="form-check-input"
+            type="checkbox"
+            id="isAdmin"
+            formControlName="isAdmin"
+          />
+        </div>
+      </div>
+    </div>
+    <div class="col-md-12 mt-3">
+      <button class="btn btn-success">
+        {{ usuario ? "Alterar" : "Incluir" }}
+      </button>
+    </div>
+  </form>
+</div>
