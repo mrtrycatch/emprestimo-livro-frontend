@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Usuario } from '../../_models/Usuario';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { UsuarioService } from '../../_services/usuario.service';
 
 @Component({
   selector: 'app-usuario-forms',
@@ -11,7 +12,11 @@ import { Router } from '@angular/router';
 export class UsuarioFormsComponent implements OnInit {
   usuario?: Usuario;
   usuarioForms: FormGroup = new FormGroup({});
-  constructor(private fb: FormBuilder, private router: Router) {
+  constructor(
+    private fb: FormBuilder,
+    private router: Router,
+    private usuarioService: UsuarioService
+  ) {
     const currentNavigation = this.router.getCurrentNavigation();
     if (currentNavigation?.extras.state) {
       this.usuario = currentNavigation.extras.state['usuario'];
@@ -45,4 +50,14 @@ export class UsuarioFormsComponent implements OnInit {
       isAdmin: [false],
     });
   }
+
+  incluirUsuario() {
+    this.usuarioService.IncluirUsuario(this.usuarioForms.value).subscribe({
+      next: (response: any) => {
+        console.log(response);
+      },
+    });
+  }
+
+  alterarUsuario() {}
 }

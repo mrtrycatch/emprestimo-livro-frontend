@@ -21,6 +21,7 @@ import { ConsultaLivrosComponent } from './_modals/consulta-livros/consulta-livr
 import { LoginComponent } from './pages/login/login.component';
 import { UsuariosComponent } from './pages/usuarios/usuarios.component';
 import { UsuarioFormsComponent } from './pages/usuario-forms/usuario-forms.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -48,6 +49,7 @@ import { UsuarioFormsComponent } from './pages/usuario-forms/usuario-forms.compo
     SharedModule,
     FormsModule,
     ReactiveFormsModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
