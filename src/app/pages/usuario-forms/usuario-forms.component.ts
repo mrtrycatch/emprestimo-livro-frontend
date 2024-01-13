@@ -3,6 +3,7 @@ import { Usuario } from '../../_models/Usuario';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UsuarioService } from '../../_services/usuario.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-usuario-forms',
@@ -15,7 +16,8 @@ export class UsuarioFormsComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private router: Router,
-    private usuarioService: UsuarioService
+    private usuarioService: UsuarioService,
+    private toastr: ToastrService
   ) {
     const currentNavigation = this.router.getCurrentNavigation();
     if (currentNavigation?.extras.state) {
@@ -24,7 +26,7 @@ export class UsuarioFormsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this, this.initializeForm();
+    this.initializeForm();
     if (this.usuario) {
       this.usuario.password = '';
       this.usuarioForms.setValue(this.usuario);
@@ -32,6 +34,15 @@ export class UsuarioFormsComponent implements OnInit {
   }
 
   initializeForm() {
+    const passwordValidators = [
+      Validators.minLength(8),
+      Validators.maxLength(100),
+    ];
+
+    if (!this.usuario) {
+      passwordValidators.unshift(Validators.required);
+    }
+
     this.usuarioForms = this.fb.group({
       id: [0, [Validators.required]],
       nome: ['', [Validators.required, Validators.maxLength(250)]],
@@ -39,24 +50,23 @@ export class UsuarioFormsComponent implements OnInit {
         '',
         [Validators.required, Validators.maxLength(250), Validators.email],
       ],
-      password: [
-        '',
-        [
-          Validators.required,
-          Validators.minLength(8),
-          Validators.maxLength(100),
-        ],
-      ],
+      password: ['', passwordValidators],
       isAdmin: [false],
     });
   }
 
   incluirUsuario() {
-    this.usuarioService.IncluirUsuario(this.usuarioForms.value).subscribe({
-      next: (response: any) => {
-        console.log(response);
-      },
-    });
+    if (this.usuarioForms.valid) {
+      this.usuarioService.IncluirUsuario(this.usuarioForms.value).subscribe({
+        next: (response: any) => {
+          this.toastr.success(response.message);
+          this.usuarioForms.reset();
+        },
+        error: (response: any) => {
+          this.toastr.error(response.error);
+        },
+      });
+    }
   }
 
   alterarUsuario() {}

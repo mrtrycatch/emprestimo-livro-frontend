@@ -4,17 +4,79 @@
       <div class="card my-5">
         <div class="card-body">
           <h3 class="card-title text-center">Faça seu login</h3>
-          <form>
+          <form [formGroup]="loginForm">
             <div class="mb-3">
               <label for="email" class="form-label">E-mail</label>
-              <input type="email" class="form-control" id="email" />
+              <input
+                type="email"
+                class="form-control"
+                id="email"
+                placeholder="Digite seu e-mail"
+                formControlName="email"
+                [class.is-invalid]="
+                  loginForm.get('email')?.errors &&
+                  loginForm.get('email')?.touched
+                "
+              />
+              <div
+                *ngIf="loginForm.get('email')?.hasError('required')"
+                class="invalid-feedback"
+              >
+                O e-mail é obrigatório
+              </div>
+              <div
+                *ngIf="loginForm.get('email')?.hasError('maxlength')"
+                class="invalid-feedback"
+              >
+                O e-mail não pode ter mais de 250 caracteres
+              </div>
+              <div
+                *ngIf="loginForm.get('email')?.hasError('email')"
+                class="invalid-feedback"
+              >
+                O e-mail é inválido
+              </div>
             </div>
             <div class="mb-3">
               <label for="password" class="form-label">Senha</label>
-              <input type="password" class="form-control" id="password" />
+              <input
+                type="password"
+                class="form-control"
+                id="password"
+                placeholder="Digite sua senha"
+                formControlName="password"
+                [class.is-invalid]="
+                  loginForm.get('password')?.errors &&
+                  loginForm.get('password')?.touched
+                "
+              />
+              <div
+                *ngIf="loginForm.get('password')?.hasError('required')"
+                class="invalid-feedback"
+              >
+                A senha é obrigatória
+              </div>
+              <div
+                *ngIf="loginForm.get('password')?.hasError('maxlength')"
+                class="invalid-feedback"
+              >
+                A senha não pode ter mais de 100 caracteres
+              </div>
+              <div
+                *ngIf="loginForm.get('password')?.hasError('minlength')"
+                class="invalid-feedback"
+              >
+                A senha não pode ter menos de 8 caracteres
+              </div>
             </div>
             <div class="text-center">
-              <button class="btn btn-success">Fazer login</button>
+              <button
+                (click)="fazerLogin()"
+                [disabled]="!loginForm.valid"
+                class="btn btn-success"
+              >
+                Fazer login
+              </button>
             </div>
           </form>
         </div>

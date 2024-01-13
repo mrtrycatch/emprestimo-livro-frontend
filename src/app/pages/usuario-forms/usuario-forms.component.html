@@ -9,9 +9,25 @@
           type="text"
           id="nome"
           class="form-control"
+          [class.is-invalid]="
+            usuarioForms.get('nome')?.errors &&
+            usuarioForms.get('nome')?.touched
+          "
           placeholder="Digite o nome do usuário"
           formControlName="nome"
         />
+        <div
+          *ngIf="usuarioForms.get('nome')?.hasError('required')"
+          class="invalid-feedback"
+        >
+          O nome é obrigatório
+        </div>
+        <div
+          *ngIf="usuarioForms.get('nome')?.hasError('maxlength')"
+          class="invalid-feedback"
+        >
+          O nome não pode ter mais de 250 caracteres
+        </div>
       </div>
       <div class="col-md-4">
         <label for="email" class="form-label">E-mail</label>
@@ -19,9 +35,31 @@
           type="email"
           id="email"
           class="form-control"
+          [class.is-invalid]="
+            usuarioForms.get('email')?.errors &&
+            usuarioForms.get('email')?.touched
+          "
           placeholder="Digite o e-mail do usuário"
           formControlName="email"
         />
+        <div
+          *ngIf="usuarioForms.get('email')?.hasError('required')"
+          class="invalid-feedback"
+        >
+          O e-mail é obrigatório
+        </div>
+        <div
+          *ngIf="usuarioForms.get('email')?.hasError('maxlength')"
+          class="invalid-feedback"
+        >
+          O e-mail não pode ter mais de 250 caracteres
+        </div>
+        <div
+          *ngIf="usuarioForms.get('email')?.hasError('email')"
+          class="invalid-feedback"
+        >
+          O e-mail é inválido
+        </div>
       </div>
       <div class="col-md-5">
         <label for="password" class="form-label">Senha padrão</label>
@@ -29,9 +67,31 @@
           type="password"
           id="password"
           class="form-control"
+          [class.is-invalid]="
+            usuarioForms.get('password')?.errors &&
+            usuarioForms.get('password')?.touched
+          "
           placeholder="Digite a senha provisória do usuário"
           formControlName="password"
         />
+        <div
+          *ngIf="usuarioForms.get('password')?.hasError('required')"
+          class="invalid-feedback"
+        >
+          A senha é obrigatória
+        </div>
+        <div
+          *ngIf="usuarioForms.get('password')?.hasError('maxlength')"
+          class="invalid-feedback"
+        >
+          A senha não pode ter mais de 100 caracteres
+        </div>
+        <div
+          *ngIf="usuarioForms.get('password')?.hasError('minlength')"
+          class="invalid-feedback"
+        >
+          A senha não pode ter menos de 8 caracteres
+        </div>
       </div>
       <div class="col-md-4 d-flex flex-column justify-content-end">
         <div class="form-check">
@@ -47,6 +107,7 @@
     </div>
     <div class="col-md-12 mt-3">
       <button
+        [disabled]="!usuarioForms.valid"
         (click)="usuario ? alterarUsuario() : incluirUsuario()"
         class="btn btn-success"
       >
