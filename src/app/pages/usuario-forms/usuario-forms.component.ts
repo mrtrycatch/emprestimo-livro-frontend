@@ -69,5 +69,16 @@ export class UsuarioFormsComponent implements OnInit {
     }
   }
 
-  alterarUsuario() {}
+  alterarUsuario() {
+    if (this.usuarioForms.valid) {
+      this.usuarioService.AlterarUsuario(this.usuarioForms.value).subscribe({
+        next: (response: any) => {
+          this.toastr.success(response.message);
+        },
+        error: (response: any) => {
+          this.toastr.error(response.error);
+        },
+      });
+    }
+  }
 }
