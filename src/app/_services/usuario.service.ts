@@ -64,6 +64,14 @@ export class UsuarioService {
       );
   }
 
+  selecionarUsuario(id?: number) {
+    return this.http.get<any>(this.baseUrl + 'usuario/' + (id ? id : '0')).pipe(
+      map((response: Usuario) => {
+        return response;
+      })
+    );
+  }
+
   fazerLogin(login: Login) {
     return this.http.post<any>(this.baseUrl + 'usuario/login', login).pipe(
       map((response: UserToken) => {
@@ -74,6 +82,16 @@ export class UsuarioService {
         return response;
       })
     );
+  }
+
+  isAdmin() {
+    const userStorage = localStorage.getItem('user');
+    if (userStorage) {
+      const user: UserToken = JSON.parse(userStorage);
+      return user.isAdmin;
+    }
+
+    return false;
   }
 
   setUsuarioAtual(userToken: UserToken) {

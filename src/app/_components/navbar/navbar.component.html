@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#">Empréstimo de livros</a>
+    <a class="navbar-brand" routerLink="/">Empréstimo de livros</a>
     <button
       class="navbar-toggler"
       type="button"
@@ -23,8 +23,11 @@
         <li class="nav-item">
           <a class="nav-link" routerLink="/emprestimo">Empréstimos</a>
         </li>
+        <li *ngIf="userToken && userToken?.isAdmin" class="nav-item">
+          <a class="nav-link" routerLink="/usuario">Usuários</a>
+        </li>
       </ul>
-      <ul class="navbar-nav ms-auto">
+      <ul *ngIf="userToken && userToken.email" class="navbar-nav ms-auto">
         <li class="nav-item dropdown">
           <a
             class="nav-link dropdown-toggle"
@@ -32,20 +35,20 @@
             role="button"
             data-bs-toggle="dropdown"
             aria-expanded="false"
-            >teste-teste.com</a
+            >{{ userToken.email }}</a
           >
           <ul
             class="dropdown-menu dropdown-menu-end"
             aria-labelledby="navbarDropdownMenuLink"
           >
-            <li>
-              <a class="dropdown-item" href=""
-                ><i class="fa fa-gear"></i> Configurações</a
+            <li (click)="alterarUsuario()" style="cursor: pointer">
+              <span class="dropdown-item"
+                ><i class="fa fa-gear"></i> Configurações</span
               >
             </li>
-            <li>
-              <a (click)="logout()" class="dropdown-item"
-                ><i class="fa fa-sign-out"></i> Sair</a
+            <li style="cursor: pointer" (click)="logout()">
+              <span class="dropdown-item"
+                ><i class="fa fa-sign-out"></i> Sair</span
               >
             </li>
           </ul>

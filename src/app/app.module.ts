@@ -24,6 +24,7 @@ import { UsuarioFormsComponent } from './pages/usuario-forms/usuario-forms.compo
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { JwtInterceptor } from './_interceptors/jwt.interceptor';
+import { AuthorizationMessageComponent } from './pages/authorization-message/authorization-message.component';
 
 @NgModule({
   declarations: [
@@ -44,6 +45,7 @@ import { JwtInterceptor } from './_interceptors/jwt.interceptor';
     LoginComponent,
     UsuariosComponent,
     UsuarioFormsComponent,
+    AuthorizationMessageComponent,
   ],
   imports: [
     BrowserModule,

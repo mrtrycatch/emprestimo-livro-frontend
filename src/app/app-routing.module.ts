@@ -9,19 +9,59 @@ import { EmprestimoComponent } from './pages/emprestimo/emprestimo.component';
 import { LoginComponent } from './pages/login/login.component';
 import { UsuariosComponent } from './pages/usuarios/usuarios.component';
 import { UsuarioFormsComponent } from './pages/usuario-forms/usuario-forms.component';
+import { authGuard } from './_guards/auth.guard';
+import { adminGuard } from './_guards/admin.guard';
+import { AuthorizationMessageComponent } from './pages/authorization-message/authorization-message.component';
+import { verificaLoginGuard } from './_guards/verifica-login.guard';
 
 const routes: Routes = [
-  { path: '', component: HomeComponent },
-  { path: 'cliente', component: ClientesComponent },
-  { path: 'cliente/create', component: ClienteFormsComponent },
-  { path: 'cliente/put', component: ClienteFormsComponent },
-  { path: 'livro', component: LivrosComponent },
-  { path: 'livro/create', component: LivroFormsComponent },
-  { path: 'emprestimo', component: EmprestimoComponent },
-  { path: 'login', component: LoginComponent },
-  { path: 'usuario', component: UsuariosComponent },
-  { path: 'usuario/create', component: UsuarioFormsComponent },
-  { path: 'usuario/put', component: UsuarioFormsComponent },
+  { path: '', component: HomeComponent, canActivate: [authGuard] },
+  { path: 'cliente', component: ClientesComponent, canActivate: [authGuard] },
+  {
+    path: 'cliente/create',
+    component: ClienteFormsComponent,
+    canActivate: [authGuard],
+  },
+  {
+    path: 'cliente/put',
+    component: ClienteFormsComponent,
+    canActivate: [authGuard],
+  },
+  { path: 'livro', component: LivrosComponent, canActivate: [authGuard] },
+  {
+    path: 'livro/create',
+    component: LivroFormsComponent,
+    canActivate: [authGuard],
+  },
+  {
+    path: 'emprestimo',
+    component: EmprestimoComponent,
+    canActivate: [authGuard],
+  },
+  {
+    path: 'login',
+    component: LoginComponent,
+    canActivate: [verificaLoginGuard],
+  },
+  {
+    path: 'usuario',
+    component: UsuariosComponent,
+    canActivate: [authGuard, adminGuard],
+  },
+  {
+    path: 'usuario/create',
+    component: UsuarioFormsComponent,
+    canActivate: [authGuard, adminGuard],
+  },
+  {
+    path: 'usuario/put',
+    component: UsuarioFormsComponent,
+    canActivate: [authGuard],
+  },
+  {
+    path: 'noauthorization',
+    component: AuthorizationMessageComponent,
+  },
 ];
 
 @NgModule({

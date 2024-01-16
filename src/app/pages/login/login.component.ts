@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UsuarioService } from '../../_services/usuario.service';
 import { ToastrService } from 'ngx-toastr';
 import { UserToken } from '../../_models/UserToken';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -18,7 +19,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private usuarioService: UsuarioService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private router: Router
   ) {}
 
   initializeForms() {
@@ -42,6 +44,7 @@ export class LoginComponent implements OnInit {
     this.usuarioService.fazerLogin(this.loginForm.value).subscribe({
       next: (response: UserToken) => {
         this.toastr.success('Login realizado com sucesso!');
+        this.router.navigate(['/']);
       },
       error: (response: any) => {
         this.toastr.error(response.error);
