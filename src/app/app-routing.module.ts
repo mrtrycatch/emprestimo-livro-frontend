@@ -34,6 +34,11 @@ const routes: Routes = [
     canActivate: [authGuard],
   },
   {
+    path: 'livro/put',
+    component: LivroFormsComponent,
+    canActivate: [authGuard],
+  },
+  {
     path: 'emprestimo',
     component: EmprestimoComponent,
     canActivate: [authGuard],

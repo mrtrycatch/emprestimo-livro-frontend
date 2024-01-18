@@ -13,7 +13,7 @@ export class UsuariosComponent implements OnInit {
   usuarios: Usuario[] = [];
   pagination: Pagination | undefined;
   pageNumber: number = 1;
-  pageSize: number = 5;
+  pageSize: number = 10;
 
   constructor(private router: Router, private usuarioService: UsuarioService) {}
 

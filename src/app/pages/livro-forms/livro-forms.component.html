@@ -1,7 +1,7 @@
 <div class="container mt-5">
-  <h2>Novo livro</h2>
+  <h2>{{ livro ? "Alterar" : "Incluir" }} livro</h2>
   <hr />
-  <form>
+  <form [formGroup]="livroForm">
     <div class="row g-3">
       <div class="col-md-4">
         <label for="nome" class="form-label">Nome</label>
@@ -10,7 +10,24 @@
           id="nome"
           class="form-control"
           placeholder="Digite o nome do livro"
+          formControlName="livroNome"
+          [class.is-invalid]="
+            livroForm.get('livroNome')?.errors &&
+            livroForm.get('livroNome')?.touched
+          "
         />
+        <div
+          *ngIf="livroForm.get('livroNome')?.hasError('required')"
+          class="invalid-feedback"
+        >
+          O nome é obrigatório
+        </div>
+        <div
+          *ngIf="livroForm.get('livroNome')?.hasError('maxlength')"
+          class="invalid-feedback"
+        >
+          O nome não pode ter mais de 50 caracteres
+        </div>
       </div>
       <div class="col-md-8">
         <label for="autor" class="form-label">Autor</label>
@@ -19,7 +36,24 @@
           id="autor"
           class="form-control"
           placeholder="Digite o nome do autor"
+          formControlName="livroAutor"
+          [class.is-invalid]="
+            livroForm.get('livroAutor')?.errors &&
+            livroForm.get('livroAutor')?.touched
+          "
         />
+        <div
+          *ngIf="livroForm.get('livroAutor')?.hasError('required')"
+          class="invalid-feedback"
+        >
+          O autor é obrigatório
+        </div>
+        <div
+          *ngIf="livroForm.get('livroAutor')?.hasError('maxlength')"
+          class="invalid-feedback"
+        >
+          O nome do autor não pode ter mais de 200 caracteres
+        </div>
       </div>
       <div class="col-md-6">
         <label for="editora" class="form-label">Editora</label>
@@ -28,11 +62,43 @@
           id="editora"
           class="form-control"
           placeholder="Digite o nome da editora"
+          formControlName="livroEditora"
+          [class.is-invalid]="
+            livroForm.get('livroEditora')?.errors &&
+            livroForm.get('livroEditora')?.touched
+          "
         />
+        <div
+          *ngIf="livroForm.get('livroEditora')?.hasError('required')"
+          class="invalid-feedback"
+        >
+          A editora é obrigatória
+        </div>
+        <div
+          *ngIf="livroForm.get('livroEditora')?.hasError('maxlength')"
+          class="invalid-feedback"
+        >
+          O nome da editora não pode ter mais de 50 caracteres
+        </div>
       </div>
       <div class="col-md-4">
         <label for="anoPublicacao" class="form-label">Ano de publicação</label>
-        <input type="date" id="anoPublicacao" class="form-control" />
+        <input
+          type="date"
+          id="anoPublicacao"
+          class="form-control"
+          formControlName="livroAnoPublicacao"
+          [class.is-invalid]="
+            livroForm.get('livroAnoPublicacao')?.errors &&
+            livroForm.get('livroAnoPublicacao')?.touched
+          "
+        />
+        <div
+          *ngIf="livroForm.get('livroAnoPublicacao')?.hasError('required')"
+          class="invalid-feedback"
+        >
+          O ano de publicação é obrigatório
+        </div>
       </div>
       <div class="col-md-2">
         <label for="edicao" class="form-label">Edição</label>
@@ -41,11 +107,34 @@
           id="edicao"
           class="form-control"
           placeholder="Edição"
+          formControlName="livroEdicao"
+          [class.is-invalid]="
+            livroForm.get('livroEdicao')?.errors &&
+            livroForm.get('livroEdicao')?.touched
+          "
         />
+        <div
+          *ngIf="livroForm.get('livroEdicao')?.hasError('required')"
+          class="invalid-feedback"
+        >
+          A adição do livro é obrigatória
+        </div>
+        <div
+          *ngIf="livroForm.get('livroEdicao')?.hasError('maxlength')"
+          class="invalid-feedback"
+        >
+          A edição do livro não pode ter mais de 50 caracteres
+        </div>
       </div>
     </div>
     <div class="col-md-12 mt-3">
-      <button class="btn btn-success">Incluir</button>
+      <button
+        (click)="livro ? alterarLivro() : incluirLivro()"
+        [disabled]="!livroForm.valid"
+        class="btn btn-success"
+      >
+        {{ livro ? "Alterar" : "Incluir" }}
+      </button>
     </div>
   </form>
 </div>
