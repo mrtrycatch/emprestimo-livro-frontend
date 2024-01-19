@@ -13,7 +13,14 @@ import { PaginationModule } from 'ngx-bootstrap/pagination';
     NgxSpinnerModule,
     ModalModule.forRoot(),
     PaginationModule.forRoot(),
+    NgxSpinnerModule,
   ],
-  exports: [ToastrModule, NgxSpinnerModule, ModalModule, PaginationModule],
+  exports: [
+    ToastrModule,
+    NgxSpinnerModule,
+    ModalModule,
+    PaginationModule,
+    NgxSpinnerModule,
+  ],
 })
 export class SharedModule {}

@@ -9,41 +9,7 @@ import { BsModalRef } from 'ngx-bootstrap/modal';
 })
 export class ConsultaClientesComponent implements OnInit {
   consultaCliente: string = '';
-  clientes: Cliente[] = [
-    {
-      Id: 1,
-      CliCPF: '12345678901',
-      CliNome: 'Nome do Cliente',
-      CliEndereco: 'Endereço do Cliente',
-      CliCidade: 'Cidade do Cliente',
-      CliBairro: 'Bairro do Cliente',
-      CliNumero: '123',
-      CliTelefoneCelular: '11987654321',
-      CliTelefoneFixo: '1134567890',
-    },
-    {
-      Id: 1,
-      CliCPF: '12345678901',
-      CliNome: 'Nome do Cliente',
-      CliEndereco: 'Endereço do Cliente',
-      CliCidade: 'Cidade do Cliente',
-      CliBairro: 'Bairro do Cliente',
-      CliNumero: '123',
-      CliTelefoneCelular: '11987654321',
-      CliTelefoneFixo: '1134567890',
-    },
-    {
-      Id: 1,
-      CliCPF: '12345678901',
-      CliNome: 'Nome do Cliente',
-      CliEndereco: 'Endereço do Cliente',
-      CliCidade: 'Cidade do Cliente',
-      CliBairro: 'Bairro do Cliente',
-      CliNumero: '123',
-      CliTelefoneCelular: '11987654321',
-      CliTelefoneFixo: '1134567890',
-    },
-  ];
+  clientes: Cliente[] = [];
 
   ngOnInit(): void {
     console.log(this.consultaCliente);

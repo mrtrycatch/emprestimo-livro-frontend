@@ -10,7 +10,7 @@
           id="cpf"
           class="form-control"
           placeholder="Digite o CPF"
-          formControlName="CliCPF"
+          formControlName="cliCPF"
         />
       </div>
       <div class="col-md-8">
@@ -20,7 +20,7 @@
           id="nome"
           class="form-control"
           placeholder="Digite o nome"
-          formControlName="CliNome"
+          formControlName="cliNome"
         />
       </div>
       <div class="col-md-6">
@@ -30,17 +30,17 @@
           id="endereco"
           class="form-control"
           placeholder="Digite o endereço"
-          formControlName="CliEndereco"
+          formControlName="cliEndereco"
         />
       </div>
       <div class="col-md-2">
         <label for="numero" class="form-label">Número</label>
         <input
-          type="number"
+          type="text"
           id="numero"
           class="form-control"
           placeholder="Digite o número"
-          formControlName="CliNumero"
+          formControlName="cliNumero"
         />
       </div>
       <div class="col-md-4">
@@ -50,7 +50,7 @@
           id="cidade"
           class="form-control"
           placeholder="Nome da cidade"
-          formControlName="CliCidade"
+          formControlName="cliCidade"
         />
       </div>
       <div class="col-md-4">
@@ -60,7 +60,7 @@
           id="bairro"
           class="form-control"
           placeholder="Nome do bairro"
-          formControlName="CliBairro"
+          formControlName="cliBairro"
         />
       </div>
       <div class="col-md-4">
@@ -70,7 +70,7 @@
           id="telefoneFixo"
           class="form-control"
           placeholder="Digite o telefone fixo"
-          formControlName="CliTelefoneFixo"
+          formControlName="cliTelefoneFixo"
         />
       </div>
       <div class="col-md-4">
@@ -80,12 +80,16 @@
           id="telefoneCelular"
           class="form-control"
           placeholder="Digite o telefone celular"
-          formControlName="CliTelefoneCelular"
+          formControlName="cliTelefoneCelular"
         />
       </div>
     </div>
     <div class="col-md-12 mt-3">
-      <button class="btn btn-success">
+      <button
+        [disabled]="!clienteForms.valid"
+        (click)="cliente ? alterarCliente() : incluirCliente()"
+        class="btn btn-success"
+      >
         {{ cliente ? "Alterar" : "Incluir" }}
       </button>
     </div>

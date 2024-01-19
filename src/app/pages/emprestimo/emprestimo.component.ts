@@ -44,14 +44,14 @@ export class EmprestimoComponent {
 
   cliente: Cliente = {
     Id: 1,
-    CliCPF: '12345678901',
-    CliNome: 'Nome do Cliente',
-    CliEndereco: 'Endereço do Cliente',
-    CliCidade: 'Cidade do Cliente',
-    CliBairro: 'Bairro do Cliente',
-    CliNumero: '123',
-    CliTelefoneCelular: '11987654321',
-    CliTelefoneFixo: '1134567890',
+    cliCPF: '12345678901',
+    cliNome: 'Nome do Cliente',
+    cliEndereco: 'Endereço do Cliente',
+    cliCidade: 'Cidade do Cliente',
+    cliBairro: 'Bairro do Cliente',
+    cliNumero: '123',
+    cliTelefoneCelular: '11987654321',
+    cliTelefoneFixo: '1134567890',
   };
 
   constructor(private modalService: BsModalService) {}

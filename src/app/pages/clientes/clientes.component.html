@@ -24,11 +24,25 @@
               <i class="fa fa-search"></i>
             </button>
           </td>
-          <td>{{ cliente.CliCPF }}</td>
-          <td>{{ cliente.CliNome }}</td>
-          <td>{{ cliente.CliTelefoneCelular }}</td>
+          <td>{{ cliente.cliCPF }}</td>
+          <td>{{ cliente.cliNome }}</td>
+          <td>{{ cliente.cliTelefoneCelular }}</td>
         </tr>
       </tbody>
     </table>
+  </div>
+  <div class="d-flex justify-content-center">
+    <pagination
+      [boundaryLinks]="true"
+      [totalItems]="pagination?.totalItems!"
+      [itemsPerPage]="pagination?.itemsPerPage!"
+      [maxSize]="10"
+      (pageChanged)="pageChanged($event)"
+      previousText="&lsaquo;"
+      nextText="&rsaquo;"
+      firstText="&laquo;"
+      lastText="&raquo;"
+    >
+    </pagination>
   </div>
 </div>

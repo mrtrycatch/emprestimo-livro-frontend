@@ -1,21 +1,21 @@
 <div class="card mb-2">
   <div class="card-body">
-    <h5>{{ cliente?.CliNome }}</h5>
+    <h5>{{ cliente?.cliNome }}</h5>
     <p>
-      <b>CPF: </b> {{ cliente?.CliCPF }} <br />
+      <b>CPF: </b> {{ cliente?.cliCPF }} <br />
       <b>Endereço: </b>
       {{
-        cliente?.CliEndereco +
+        cliente?.cliEndereco +
           ", bairro " +
-          cliente?.CliBairro +
+          cliente?.cliBairro +
           ", cidade " +
-          cliente?.CliCidade +
+          cliente?.cliCidade +
           ", número " +
-          cliente?.CliNumero
+          cliente?.cliNumero
       }}
       <br />
-      <b>Tel. Celular: </b> {{ cliente?.CliTelefoneCelular }} <br />
-      <b>Tel. Fixo: </b> {{ cliente?.CliTelefoneFixo }}
+      <b>Tel. Celular: </b> {{ cliente?.cliTelefoneCelular }} <br />
+      <b>Tel. Fixo: </b> {{ cliente?.cliTelefoneFixo }}
     </p>
     <div class="text-end">
       <button *ngIf="exibeLixeira" class="btn btn-danger">
