@@ -55,9 +55,6 @@ export class LivroFormsComponent implements OnInit {
         next: (response) => {
           this.toastr.success(response.message);
         },
-        error: (error) => {
-          this.toastr.error(error.error);
-        },
       });
     }
   }
@@ -67,10 +64,6 @@ export class LivroFormsComponent implements OnInit {
       this.livroService.alterarLivro(this.livroForm.value).subscribe({
         next: (response) => {
           this.toastr.success(response.message);
-        },
-        error: (error) => {
-          console.log(error);
-          this.toastr.error(error.error);
         },
       });
     }

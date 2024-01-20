@@ -50,8 +50,22 @@ export class ClienteFormsComponent implements OnInit {
       cliCidade: ['', [Validators.required, Validators.maxLength(50)]],
       cliBairro: ['', [Validators.required, Validators.maxLength(50)]],
       cliNumero: ['', [Validators.required, Validators.maxLength(50)]],
-      cliTelefoneCelular: ['', [Validators.required, Validators.maxLength(11)]],
-      cliTelefoneFixo: ['', [Validators.required, Validators.maxLength(10)]],
+      cliTelefoneCelular: [
+        '',
+        [
+          Validators.required,
+          Validators.maxLength(11),
+          Validators.minLength(11),
+        ],
+      ],
+      cliTelefoneFixo: [
+        '',
+        [
+          Validators.required,
+          Validators.maxLength(10),
+          Validators.minLength(11),
+        ],
+      ],
     });
   }
 
@@ -60,9 +74,6 @@ export class ClienteFormsComponent implements OnInit {
       next: (response) => {
         this.toastr.success(response.message);
       },
-      error: (error) => {
-        this.toastr.error(error.error);
-      },
     });
   }
 
@@ -70,10 +81,6 @@ export class ClienteFormsComponent implements OnInit {
     this.clienteService.incluirCliente(this.clienteForms.value).subscribe({
       next: (response) => {
         this.toastr.success(response.message);
-      },
-      error: (error) => {
-        console.log(error);
-        this.toastr.error(error.error);
       },
     });
   }

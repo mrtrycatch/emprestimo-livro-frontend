@@ -62,9 +62,6 @@ export class UsuarioFormsComponent implements OnInit {
           this.toastr.success(response.message);
           this.usuarioForms.reset();
         },
-        error: (response: any) => {
-          this.toastr.error(response.error);
-        },
       });
     }
   }
@@ -74,9 +71,6 @@ export class UsuarioFormsComponent implements OnInit {
       this.usuarioService.AlterarUsuario(this.usuarioForms.value).subscribe({
         next: (response: any) => {
           this.toastr.success(response.message);
-        },
-        error: (response: any) => {
-          this.toastr.error(response.error);
         },
       });
     }

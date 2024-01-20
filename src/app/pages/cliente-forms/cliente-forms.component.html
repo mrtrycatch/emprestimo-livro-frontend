@@ -11,7 +11,29 @@
           class="form-control"
           placeholder="Digite o CPF"
           formControlName="cliCPF"
+          [class.is-invalid]="
+            clienteForms.get('cliCPF')?.errors &&
+            clienteForms.get('cliCPF')?.touched
+          "
         />
+        <div
+          *ngIf="clienteForms.get('cliCPF')?.hasError('required')"
+          class="invalid-feedback"
+        >
+          O CPF é obrigatório
+        </div>
+        <div
+          *ngIf="clienteForms.get('cliCPF')?.hasError('maxlength')"
+          class="invalid-feedback"
+        >
+          O CPF não pode ter mais de 11 caracteres
+        </div>
+        <div
+          *ngIf="clienteForms.get('cliCPF')?.hasError('minlength')"
+          class="invalid-feedback"
+        >
+          O CPF não pode ter menos de 11 caracteres
+        </div>
       </div>
       <div class="col-md-8">
         <label for="nome" class="form-label">Nome</label>
@@ -21,7 +43,23 @@
           class="form-control"
           placeholder="Digite o nome"
           formControlName="cliNome"
+          [class.is-invalid]="
+            clienteForms.get('cliNome')?.errors &&
+            clienteForms.get('cliNome')?.touched
+          "
         />
+        <div
+          *ngIf="clienteForms.get('cliNome')?.hasError('required')"
+          class="invalid-feedback"
+        >
+          O Nome é obrigatório
+        </div>
+        <div
+          *ngIf="clienteForms.get('cliNome')?.hasError('maxlength')"
+          class="invalid-feedback"
+        >
+          O Nome não pode ter mais de 200 caracteres
+        </div>
       </div>
       <div class="col-md-6">
         <label for="endereco" class="form-label">Endereço</label>
@@ -31,7 +69,23 @@
           class="form-control"
           placeholder="Digite o endereço"
           formControlName="cliEndereco"
+          [class.is-invalid]="
+            clienteForms.get('cliEndereco')?.errors &&
+            clienteForms.get('cliEndereco')?.touched
+          "
         />
+        <div
+          *ngIf="clienteForms.get('cliEndereco')?.hasError('required')"
+          class="invalid-feedback"
+        >
+          O Endereço é obrigatório
+        </div>
+        <div
+          *ngIf="clienteForms.get('cliEndereco')?.hasError('maxlength')"
+          class="invalid-feedback"
+        >
+          O Endereço não pode ter mais de 50 caracteres
+        </div>
       </div>
       <div class="col-md-2">
         <label for="numero" class="form-label">Número</label>
@@ -41,7 +95,23 @@
           class="form-control"
           placeholder="Digite o número"
           formControlName="cliNumero"
+          [class.is-invalid]="
+            clienteForms.get('cliNumero')?.errors &&
+            clienteForms.get('cliNumero')?.touched
+          "
         />
+        <div
+          *ngIf="clienteForms.get('cliNumero')?.hasError('required')"
+          class="invalid-feedback"
+        >
+          O Número é obrigatório
+        </div>
+        <div
+          *ngIf="clienteForms.get('cliNumero')?.hasError('maxlength')"
+          class="invalid-feedback"
+        >
+          O Número não pode ter mais de 50 caracteres
+        </div>
       </div>
       <div class="col-md-4">
         <label for="cidade" class="form-label">Cidade</label>
@@ -51,7 +121,23 @@
           class="form-control"
           placeholder="Nome da cidade"
           formControlName="cliCidade"
+          [class.is-invalid]="
+            clienteForms.get('cliCidade')?.errors &&
+            clienteForms.get('cliCidade')?.touched
+          "
         />
+        <div
+          *ngIf="clienteForms.get('cliCidade')?.hasError('required')"
+          class="invalid-feedback"
+        >
+          A Cidade é obrigatória
+        </div>
+        <div
+          *ngIf="clienteForms.get('cliCidade')?.hasError('maxlength')"
+          class="invalid-feedback"
+        >
+          A Cidade não pode ter mais de 50 caracteres
+        </div>
       </div>
       <div class="col-md-4">
         <label for="bairro" class="form-label">Bairro</label>
@@ -61,7 +147,23 @@
           class="form-control"
           placeholder="Nome do bairro"
           formControlName="cliBairro"
+          [class.is-invalid]="
+            clienteForms.get('cliBairro')?.errors &&
+            clienteForms.get('cliBairro')?.touched
+          "
         />
+        <div
+          *ngIf="clienteForms.get('cliBairro')?.hasError('required')"
+          class="invalid-feedback"
+        >
+          O Bairro é obrigatório
+        </div>
+        <div
+          *ngIf="clienteForms.get('cliBairro')?.hasError('maxlength')"
+          class="invalid-feedback"
+        >
+          O Bairro não pode ter mais de 50 caracteres
+        </div>
       </div>
       <div class="col-md-4">
         <label for="telefoneFixo" class="form-label">Telefone Fixo</label>
@@ -71,7 +173,29 @@
           class="form-control"
           placeholder="Digite o telefone fixo"
           formControlName="cliTelefoneFixo"
+          [class.is-invalid]="
+            clienteForms.get('cliTelefoneFixo')?.errors &&
+            clienteForms.get('cliTelefoneFixo')?.touched
+          "
         />
+        <div
+          *ngIf="clienteForms.get('cliTelefoneFixo')?.hasError('required')"
+          class="invalid-feedback"
+        >
+          O Telefone fixo é obrigatório
+        </div>
+        <div
+          *ngIf="clienteForms.get('cliTelefoneFixo')?.hasError('maxlength')"
+          class="invalid-feedback"
+        >
+          O Telefone fixo não pode ter mais de 11 caracteres
+        </div>
+        <div
+          *ngIf="clienteForms.get('cliTelefoneFixo')?.hasError('minlength')"
+          class="invalid-feedback"
+        >
+          O Telefone fixo não pode ter menos de 11 caracteres
+        </div>
       </div>
       <div class="col-md-4">
         <label for="telefoneCelular" class="form-label">Telefone Celular</label>
@@ -81,7 +205,29 @@
           class="form-control"
           placeholder="Digite o telefone celular"
           formControlName="cliTelefoneCelular"
+          [class.is-invalid]="
+            clienteForms.get('cliTelefoneCelular')?.errors &&
+            clienteForms.get('cliTelefoneCelular')?.touched
+          "
         />
+        <div
+          *ngIf="clienteForms.get('cliTelefoneCelular')?.hasError('required')"
+          class="invalid-feedback"
+        >
+          O Telefone é obrigatório
+        </div>
+        <div
+          *ngIf="clienteForms.get('cliTelefoneCelular')?.hasError('maxlength')"
+          class="invalid-feedback"
+        >
+          O Telefone não pode ter mais de 11 caracteres
+        </div>
+        <div
+          *ngIf="clienteForms.get('cliTelefoneCelular')?.hasError('minlength')"
+          class="invalid-feedback"
+        >
+          O Telefone não pode ter menos de 11 caracteres
+        </div>
       </div>
     </div>
     <div class="col-md-12 mt-3">

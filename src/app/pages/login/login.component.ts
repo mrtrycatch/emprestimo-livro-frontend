@@ -46,9 +46,6 @@ export class LoginComponent implements OnInit {
         this.toastr.success('Login realizado com sucesso!');
         this.router.navigate(['/']);
       },
-      error: (response: any) => {
-        this.toastr.error(response.error);
-      },
     });
   }
 }
