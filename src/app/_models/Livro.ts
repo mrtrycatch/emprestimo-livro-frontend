@@ -3,6 +3,6 @@ export interface Livro {
   livroNome: string;
   livroAutor: string;
   livroEditora: string;
-  livroAnoPublicacao: Date;
+  livroAnoPublicacao: string;
   livroEdicao: string;
 }

@@ -47,6 +47,14 @@ export class ClienteService {
     );
   }
 
+  selecionarCliente(id: number) {
+    return this.http.get<any>(this.baseUrl + 'cliente/' + id).pipe(
+      map((response) => {
+        return response;
+      })
+    );
+  }
+
   alterarCliente(cliente: Cliente) {
     return this.http.put<any>(this.baseUrl + 'cliente', cliente).pipe(
       map((response) => {

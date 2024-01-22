@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Cliente } from '../../_models/Cliente';
 
 @Component({
@@ -10,4 +10,9 @@ export class InfoClienteComponent {
   @Input() cliente?: Cliente;
   @Input() exibeLixeira: boolean = false;
   @Input() exibeAdd: boolean = false;
+  @Output() clickButton = new EventEmitter<void>();
+
+  addOrRemove() {
+    this.clickButton.emit();
+  }
 }

@@ -20,8 +20,10 @@
         </button>
       </div>
       <app-info-cliente
+        *ngIf="cliente"
         [exibeLixeira]="true"
         [cliente]="cliente"
+        (clickButton)="removerCliente()"
       ></app-info-cliente>
     </div>
     <div class="col-md-6 mb-4">

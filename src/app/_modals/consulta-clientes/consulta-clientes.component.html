@@ -15,6 +15,7 @@
         [exibeAdd]="true"
         [cliente]="cliente"
         *ngFor="let cliente of clientes"
+        (clickButton)="adicionarCliente(cliente)"
       ></app-info-cliente>
     </div>
   </div>

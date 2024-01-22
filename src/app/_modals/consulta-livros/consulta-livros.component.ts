@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit } from '@angular/core';
 import { BsModalRef } from 'ngx-bootstrap/modal';
 import { Livro } from '../../_models/Livro';
 
@@ -9,30 +9,31 @@ import { Livro } from '../../_models/Livro';
 })
 export class ConsultaLivrosComponent implements OnInit {
   consultaLivro: string = '';
+  onClose: EventEmitter<any> = new EventEmitter();
   livros: Livro[] = [
     {
       id: 1,
-      livroAnoPublicacao: new Date(2023, 5, 1),
-      livroAutor: 'Vinicius',
-      livroEdicao: '1',
-      livroEditora: 'Editora',
       livroNome: 'Pinóquio',
+      livroAutor: 'Carlo Collodi',
+      livroEditora: 'Editolandia',
+      livroAnoPublicacao: '2024-01-06T00:00:00',
+      livroEdicao: '1',
     },
     {
-      id: 1,
-      livroAnoPublicacao: new Date(2022, 5, 1),
-      livroAutor: 'João',
-      livroEdicao: '2',
-      livroEditora: 'Editora',
-      livroNome: 'Lobo Mau',
+      id: 6,
+      livroNome: 'A estratégia do oceano azul',
+      livroAutor: 'Renée Mauborgne',
+      livroEditora: 'Actual',
+      livroAnoPublicacao: '2006-01-01T00:00:00',
+      livroEdicao: '1',
     },
     {
-      id: 1,
-      livroAnoPublicacao: new Date(2022, 5, 1),
-      livroAutor: 'João',
-      livroEdicao: '2',
-      livroEditora: 'Editora',
-      livroNome: 'Lobo Mau',
+      id: 7,
+      livroNome: 'Os segredos da mente milionária',
+      livroAutor: 'T. Harv Eker',
+      livroEditora: 'Sextante',
+      livroAnoPublicacao: '2009-01-01T00:00:00',
+      livroEdicao: '1',
     },
   ];
 
@@ -44,5 +45,10 @@ export class ConsultaLivrosComponent implements OnInit {
 
   fecharModal() {
     this.bsModalRef.hide();
+  }
+
+  adicionarLivro(livro: Livro) {
+    this.onClose.emit(livro);
+    this.fecharModal();
   }
 }

@@ -4,6 +4,7 @@ import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { ConsultaClientesComponent } from '../../_modals/consulta-clientes/consulta-clientes.component';
 import { Cliente } from '../../_models/Cliente';
 import { ConsultaLivrosComponent } from '../../_modals/consulta-livros/consulta-livros.component';
+import { ClienteService } from '../../_services/cliente.service';
 
 @Component({
   selector: 'app-emprestimo',
@@ -11,57 +12,29 @@ import { ConsultaLivrosComponent } from '../../_modals/consulta-livros/consulta-
   styleUrl: './emprestimo.component.css',
 })
 export class EmprestimoComponent {
-  livros: Livro[] = [
-    {
-      id: 1,
-      livroAnoPublicacao: new Date(2023, 5, 1),
-      livroAutor: 'Vinicius',
-      livroEdicao: '1',
-      livroEditora: 'Editora',
-      livroNome: 'Pinóquio',
-    },
-    {
-      id: 1,
-      livroAnoPublicacao: new Date(2022, 5, 1),
-      livroAutor: 'João',
-      livroEdicao: '2',
-      livroEditora: 'Editora',
-      livroNome: 'Lobo Mau',
-    },
-    {
-      id: 1,
-      livroAnoPublicacao: new Date(2022, 5, 1),
-      livroAutor: 'João',
-      livroEdicao: '2',
-      livroEditora: 'Editora',
-      livroNome: 'Lobo Mau',
-    },
-  ];
+  livros: Livro[] = [];
 
   bsModalRef?: BsModalRef;
   consultaCliente: string = '';
   consultaLivro: string = '';
 
-  cliente: Cliente = {
-    Id: 1,
-    cliCPF: '12345678901',
-    cliNome: 'Nome do Cliente',
-    cliEndereco: 'Endereço do Cliente',
-    cliCidade: 'Cidade do Cliente',
-    cliBairro: 'Bairro do Cliente',
-    cliNumero: '123',
-    cliTelefoneCelular: '11987654321',
-    cliTelefoneFixo: '1134567890',
-  };
+  cliente?: Cliente;
 
-  constructor(private modalService: BsModalService) {}
+  constructor(
+    private modalService: BsModalService,
+    private clienteService: ClienteService
+  ) {}
 
   abrirConsultaCliente() {
     const initialState = {
       consultaCliente: this.consultaCliente,
     };
-    this.modalService.show(ConsultaClientesComponent, {
+    this.bsModalRef = this.modalService.show(ConsultaClientesComponent, {
       initialState,
+    });
+
+    this.bsModalRef?.content.onClose.subscribe((result: Cliente) => {
+      this.cliente = result;
     });
   }
 
@@ -69,8 +42,16 @@ export class EmprestimoComponent {
     const initialState = {
       consultaLivro: this.consultaLivro,
     };
-    this.modalService.show(ConsultaLivrosComponent, {
+    this.bsModalRef = this.modalService.show(ConsultaLivrosComponent, {
       initialState,
     });
+
+    this.bsModalRef?.content.onClose.subscribe((result: Livro) => {
+      this.livros.push(result);
+    });
+  }
+
+  removerCliente() {
+    this.cliente = undefined;
   }
 }

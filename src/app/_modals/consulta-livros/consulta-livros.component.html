@@ -15,6 +15,7 @@
         [exibeAdd]="true"
         [livro]="livro"
         *ngFor="let livro of livros"
+        (clickButton)="adicionarLivro(livro)"
       ></app-info-livro>
     </div>
   </div>

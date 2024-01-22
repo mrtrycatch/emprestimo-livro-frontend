@@ -18,10 +18,14 @@
       <b>Tel. Fixo: </b> {{ cliente?.cliTelefoneFixo }}
     </p>
     <div class="text-end">
-      <button *ngIf="exibeLixeira" class="btn btn-danger">
+      <button
+        (click)="addOrRemove()"
+        *ngIf="exibeLixeira"
+        class="btn btn-danger"
+      >
         <i class="fa fa-trash"></i>
       </button>
-      <button *ngIf="exibeAdd" class="btn btn-success">
+      <button (click)="addOrRemove()" *ngIf="exibeAdd" class="btn btn-success">
         <i class="fa fa-plus"></i>
       </button>
     </div>
