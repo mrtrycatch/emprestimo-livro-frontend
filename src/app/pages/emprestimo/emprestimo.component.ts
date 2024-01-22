@@ -5,6 +5,9 @@ import { ConsultaClientesComponent } from '../../_modals/consulta-clientes/consu
 import { Cliente } from '../../_models/Cliente';
 import { ConsultaLivrosComponent } from '../../_modals/consulta-livros/consulta-livros.component';
 import { ClienteService } from '../../_services/cliente.service';
+import { ToastrService } from 'ngx-toastr';
+import { Emprestimo } from '../../_models/Emprestimo';
+import { EmprestimoService } from '../../_services/emprestimo.service';
 
 @Component({
   selector: 'app-emprestimo',
@@ -19,10 +22,13 @@ export class EmprestimoComponent {
   consultaLivro: string = '';
 
   cliente?: Cliente;
+  dataEntrega?: string;
 
   constructor(
     private modalService: BsModalService,
-    private clienteService: ClienteService
+    private clienteService: ClienteService,
+    private toastr: ToastrService,
+    private emprestimoService: EmprestimoService
   ) {}
 
   abrirConsultaCliente() {
@@ -47,11 +53,37 @@ export class EmprestimoComponent {
     });
 
     this.bsModalRef?.content.onClose.subscribe((result: Livro) => {
-      this.livros.push(result);
+      var existeLivroNaLista = this.livros.some((x) => x.id === result.id);
+      if (existeLivroNaLista) {
+        this.toastr.error('Você já incluiu esse livro no empréstimo.');
+      } else {
+        this.livros.push(result);
+      }
     });
   }
 
   removerCliente() {
     this.cliente = undefined;
+  }
+
+  removerLivro(idLivro: number) {
+    this.livros = this.livros.filter((x) => x.id !== idLivro);
+  }
+
+  adicionarEmprestimo() {
+    var emprestimo: Emprestimo = {
+      idCliente: this.cliente?.id!,
+      idsLivros: this.livros.map((x) => x.id),
+      dataEntrega: this.dataEntrega!,
+    };
+
+    this.emprestimoService.incluirEmprestimo(emprestimo).subscribe({
+      next: (response) => {
+        this.toastr.success(response.message);
+        this.livros = [];
+        this.dataEntrega = undefined;
+        this.cliente = undefined;
+      },
+    });
   }
 }

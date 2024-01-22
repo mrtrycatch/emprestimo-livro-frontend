@@ -35,14 +35,14 @@ export class ErrorInterceptor implements HttpInterceptor {
                 this.toastr.error(error.statusText, error.status);
               } else {
                 this.toastr.error(
-                  error.error === null ? 'Bad Request' : error.error.message,
+                  error.error === null ? 'Bad Request' : error.error,
                   error.status
                 );
               }
               break;
             case 401:
               this.toastr.error(
-                error.error === null ? 'Não autorizado' : error.error.message,
+                error.error === null ? 'Não autorizado' : error.error,
                 error.status
               );
               break;

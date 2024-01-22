@@ -25,6 +25,15 @@
         [cliente]="cliente"
         (clickButton)="removerCliente()"
       ></app-info-cliente>
+      <div *ngIf="cliente">
+        <label for="dataEntrega">Data de entrega</label>
+        <input
+          id="dataEntrega"
+          [(ngModel)]="dataEntrega"
+          class="form-control"
+          type="date"
+        />
+      </div>
     </div>
     <div class="col-md-6 mb-4">
       <h4>Selecionar Livros</h4>
@@ -47,6 +56,7 @@
         <app-info-livro
           [exibeLixeira]="true"
           *ngFor="let livro of livros"
+          (clickButton)="removerLivro(livro.id)"
           [livro]="livro"
         ></app-info-livro>
       </div>
@@ -54,7 +64,13 @@
   </div>
   <div class="row mt-4 mb-4">
     <div class="col-12">
-      <button class="btn btn-success me-2">Confirmar empréstimo</button>
+      <button
+        (click)="adicionarEmprestimo()"
+        [disabled]="!cliente || !dataEntrega || livros.length == 0"
+        class="btn btn-success me-2"
+      >
+        Confirmar empréstimo
+      </button>
       <button class="btn btn-secondary">Cancelar</button>
     </div>
   </div>
