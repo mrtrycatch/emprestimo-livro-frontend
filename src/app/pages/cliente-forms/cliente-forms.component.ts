@@ -63,7 +63,7 @@ export class ClienteFormsComponent implements OnInit {
         [
           Validators.required,
           Validators.maxLength(10),
-          Validators.minLength(11),
+          Validators.minLength(10),
         ],
       ],
     });

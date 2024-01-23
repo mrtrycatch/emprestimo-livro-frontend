@@ -65,11 +65,11 @@
   <div class="row mt-4 mb-4">
     <div class="col-12">
       <button
-        (click)="adicionarEmprestimo()"
+        (click)="emprestimo ? alterarEmprestimo() : adicionarEmprestimo()"
         [disabled]="!cliente || !dataEntrega || livros.length == 0"
         class="btn btn-success me-2"
       >
-        Confirmar empréstimo
+        {{ emprestimo ? "Alterar" : "Confirmar" }} empréstimo
       </button>
       <button class="btn btn-secondary">Cancelar</button>
     </div>

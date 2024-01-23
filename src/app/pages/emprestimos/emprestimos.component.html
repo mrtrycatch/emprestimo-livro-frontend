@@ -1,32 +1,34 @@
 <div class="container mt-5">
-  <h2>Clientes</h2>
+  <h2>Empréstimos</h2>
   <hr />
-  <button routerLink="/cliente/create" class="btn btn-sm btn-primary">
-    <i class="fa fa-plus"></i> Novo cliente
+  <button routerLink="/emprestimo" class="btn btn-sm btn-primary">
+    <i class="fa fa-plus"></i> Novo empréstimo
   </button>
   <div class="table-responsive">
     <table class="table">
       <thead>
         <tr>
           <th></th>
+          <th>Cliente</th>
           <th>CPF</th>
-          <th>Nome</th>
-          <th>Tel. Celular</th>
+          <th>Data de empréstimo</th>
+          <th>Data de entrega</th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let cliente of clientes">
+        <tr *ngFor="let emprestimo of emprestimos">
           <td>
             <button
-              (click)="alterarOuExcluirCliente(cliente)"
+              (click)="alterarEmprestimo(emprestimo)"
               class="btn btn-sm btn-primary"
             >
               <i class="fa fa-search"></i>
             </button>
           </td>
-          <td>{{ cpfFormatter(cliente.cliCPF) }}</td>
-          <td>{{ cliente.cliNome }}</td>
-          <td>{{ celularFormatter(cliente.cliTelefoneCelular) }}</td>
+          <td>{{ emprestimo.clienteDTO.cliNome }}</td>
+          <td>{{ cpfFormatter(emprestimo.clienteDTO.cliCPF) }}</td>
+          <td>{{ dataFormatter(emprestimo.dataEmprestimo) }}</td>
+          <td>{{ dataFormatter(emprestimo.dataEntrega) }}</td>
         </tr>
       </tbody>
     </table>

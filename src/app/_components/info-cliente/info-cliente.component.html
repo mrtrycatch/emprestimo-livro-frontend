@@ -2,7 +2,7 @@
   <div class="card-body">
     <h5>{{ cliente?.cliNome }}</h5>
     <p>
-      <b>CPF: </b> {{ cliente?.cliCPF }} <br />
+      <b>CPF: </b> {{ cpfFormatter(cliente?.cliCPF) }} <br />
       <b>Endereço: </b>
       {{
         cliente?.cliEndereco +
@@ -14,8 +14,9 @@
           cliente?.cliNumero
       }}
       <br />
-      <b>Tel. Celular: </b> {{ cliente?.cliTelefoneCelular }} <br />
-      <b>Tel. Fixo: </b> {{ cliente?.cliTelefoneFixo }}
+      <b>Tel. Celular: </b>
+      {{ telefoneCelularFormatter(cliente?.cliTelefoneCelular) }} <br />
+      <b>Tel. Fixo: </b> {{ telefoneFixoFormatter(cliente?.cliTelefoneFixo) }}
     </p>
     <div class="text-end">
       <button

@@ -13,6 +13,7 @@ import { authGuard } from './_guards/auth.guard';
 import { adminGuard } from './_guards/admin.guard';
 import { AuthorizationMessageComponent } from './pages/authorization-message/authorization-message.component';
 import { verificaLoginGuard } from './_guards/verifica-login.guard';
+import { EmprestimosComponent } from './pages/emprestimos/emprestimos.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent, canActivate: [authGuard] },
@@ -41,6 +42,11 @@ const routes: Routes = [
   {
     path: 'emprestimo',
     component: EmprestimoComponent,
+    canActivate: [authGuard],
+  },
+  {
+    path: 'emprestimos',
+    component: EmprestimosComponent,
     canActivate: [authGuard],
   },
   {

@@ -27,6 +27,7 @@ import { JwtInterceptor } from './_interceptors/jwt.interceptor';
 import { AuthorizationMessageComponent } from './pages/authorization-message/authorization-message.component';
 import { LoadingInterceptor } from './_interceptors/loading.interceptor';
 import { ErrorInterceptor } from './_interceptors/error.interceptor';
+import { EmprestimosComponent } from './pages/emprestimos/emprestimos.component';
 
 @NgModule({
   declarations: [
@@ -48,6 +49,7 @@ import { ErrorInterceptor } from './_interceptors/error.interceptor';
     UsuariosComponent,
     UsuarioFormsComponent,
     AuthorizationMessageComponent,
+    EmprestimosComponent,
   ],
   imports: [
     BrowserModule,
