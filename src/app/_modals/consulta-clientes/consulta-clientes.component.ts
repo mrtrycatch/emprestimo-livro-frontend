@@ -1,6 +1,8 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Cliente } from '../../_models/Cliente';
 import { BsModalRef } from 'ngx-bootstrap/modal';
+import { ClienteService } from '../../_services/cliente.service';
+import { Pagination } from '../../_models/Pagination';
 
 @Component({
   selector: 'app-consulta-clientes',
@@ -10,102 +12,19 @@ import { BsModalRef } from 'ngx-bootstrap/modal';
 export class ConsultaClientesComponent implements OnInit {
   consultaCliente: string = '';
   onClose: EventEmitter<any> = new EventEmitter();
-  clientes: Cliente[] = [
-    {
-      id: 1,
-      cliCPF: '11111111111',
-      cliNome: 'Maria',
-      cliEndereco: 'teste',
-      cliCidade: 'teste',
-      cliBairro: 'teste',
-      cliNumero: '111',
-      cliTelefoneCelular: '1111111111',
-      cliTelefoneFixo: '1111111111',
-    },
-    {
-      id: 2,
-      cliCPF: '11111111111',
-      cliNome: 'Vinicius',
-      cliEndereco: 'teste',
-      cliCidade: 'teste',
-      cliBairro: 'teste',
-      cliNumero: 'teste',
-      cliTelefoneCelular: '1111111111',
-      cliTelefoneFixo: '1111111111',
-    },
-    {
-      id: 3,
-      cliCPF: '11111111111',
-      cliNome: 'Vinicius',
-      cliEndereco: 'teste',
-      cliCidade: 'teste',
-      cliBairro: 'teste',
-      cliNumero: 'teste',
-      cliTelefoneCelular: '1111111111',
-      cliTelefoneFixo: '1111111111',
-    },
-    {
-      id: 4,
-      cliCPF: '11111111111',
-      cliNome: 'Vinicius',
-      cliEndereco: 'teste',
-      cliCidade: 'teste',
-      cliBairro: 'teste',
-      cliNumero: 'teste',
-      cliTelefoneCelular: '1111111111',
-      cliTelefoneFixo: '1111111111',
-    },
-    {
-      id: 5,
-      cliCPF: '11111111111',
-      cliNome: 'Vinicius',
-      cliEndereco: 'teste',
-      cliCidade: 'teste',
-      cliBairro: 'teste',
-      cliNumero: 'teste',
-      cliTelefoneCelular: '1111111111',
-      cliTelefoneFixo: '1111111111',
-    },
-    {
-      id: 6,
-      cliCPF: '11111111111',
-      cliNome: 'Vinicius',
-      cliEndereco: 'teste',
-      cliCidade: 'teste',
-      cliBairro: 'teste',
-      cliNumero: 'teste',
-      cliTelefoneCelular: '1111111111',
-      cliTelefoneFixo: '1111111111',
-    },
-    {
-      id: 7,
-      cliCPF: '11111111111',
-      cliNome: 'Vinicius',
-      cliEndereco: 'teste',
-      cliCidade: 'teste',
-      cliBairro: 'teste',
-      cliNumero: 'teste',
-      cliTelefoneCelular: '1111111111',
-      cliTelefoneFixo: '1111111111',
-    },
-    {
-      id: 1002,
-      cliCPF: '11122222222',
-      cliNome: 'João',
-      cliEndereco: 'Rua testando',
-      cliCidade: 'São Paulo',
-      cliBairro: 'Bairro teste',
-      cliNumero: '123',
-      cliTelefoneCelular: '11999999999',
-      cliTelefoneFixo: '1199999999',
-    },
-  ];
+  clientes: Cliente[] = [];
+  page: number = 1;
+  itemsPerPage: number = 10;
+  pagination: Pagination | undefined;
 
   ngOnInit(): void {
-    console.log(this.consultaCliente);
+    this.consultarClientes();
   }
 
-  constructor(private bsModalRef: BsModalRef) {}
+  constructor(
+    private bsModalRef: BsModalRef,
+    private clienteService: ClienteService
+  ) {}
 
   fecharModal() {
     this.bsModalRef.hide();
@@ -115,5 +34,25 @@ export class ConsultaClientesComponent implements OnInit {
     this.onClose.emit(cliente);
 
     this.fecharModal();
+  }
+
+  consultarClientes() {
+    this.clienteService
+      .pesquisarCliente(this.consultaCliente, this.page, this.itemsPerPage)
+      .subscribe({
+        next: (response) => {
+          if (response.result && response.pagination) {
+            this.clientes = response.result;
+            this.pagination = response.pagination;
+          }
+        },
+      });
+  }
+
+  pageChanged(event: any) {
+    if (this.page !== event.page) {
+      this.page = event.page;
+      this.consultarClientes();
+    }
   }
 }

@@ -29,6 +29,7 @@ export class EmprestimoComponent implements OnInit {
 
   cliente?: Cliente;
   dataEntrega?: string;
+  entregue?: boolean;
 
   constructor(
     private modalService: BsModalService,
@@ -53,6 +54,7 @@ export class EmprestimoComponent implements OnInit {
         .split('T')[0];
 
       this.dataEntrega = dataEntregaFormatado;
+      this.entregue = this.emprestimo.entregue;
 
       this.LivroEmprestadoService.SelecionarLivrosEmprestados(
         this.emprestimo.id
@@ -126,7 +128,7 @@ export class EmprestimoComponent implements OnInit {
       idCliente: this.cliente?.id!,
       idsLivros: this.livros.map((x) => x.id),
       dataEntrega: this.dataEntrega!,
-      entregue: false,
+      entregue: this.entregue!,
     };
     this.emprestimoService.alterarEmprestimo(emprestimoPut).subscribe({
       next: (response) => {

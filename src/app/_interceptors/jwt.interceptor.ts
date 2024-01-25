@@ -5,7 +5,7 @@ import {
   HttpRequest,
 } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, take } from 'rxjs';
+import { Observable, catchError, take, throwError } from 'rxjs';
 import { UsuarioService } from '../_services/usuario.service';
 
 @Injectable()
@@ -27,6 +27,7 @@ export class JwtInterceptor implements HttpInterceptor {
         }
       },
     });
+
     return next.handle(req);
   }
 }

@@ -28,6 +28,7 @@ import { AuthorizationMessageComponent } from './pages/authorization-message/aut
 import { LoadingInterceptor } from './_interceptors/loading.interceptor';
 import { ErrorInterceptor } from './_interceptors/error.interceptor';
 import { EmprestimosComponent } from './pages/emprestimos/emprestimos.component';
+import { provideNgxMask } from 'ngx-mask';
 
 @NgModule({
   declarations: [
@@ -64,6 +65,7 @@ import { EmprestimosComponent } from './pages/emprestimos/emprestimos.component'
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+    provideNgxMask(),
   ],
   bootstrap: [AppComponent],
 })

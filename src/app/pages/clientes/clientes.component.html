@@ -4,6 +4,170 @@
   <button routerLink="/cliente/create" class="btn btn-sm btn-primary">
     <i class="fa fa-plus"></i> Novo cliente
   </button>
+
+  <button
+    type="button"
+    class="btn btn-sm btn-primary ms-2"
+    (click)="isCollapsed = !isCollapsed"
+    [attr.aria-expanded]="!isCollapsed"
+    aria-controls="collapseBasic"
+  >
+    Filtrar
+  </button>
+  <div id="collapseBasic" [collapse]="isCollapsed" [isAnimated]="true">
+    <form class="mt-3" [formGroup]="clienteForms">
+      <div class="row g-3">
+        <div class="col-md-4">
+          <label for="cpf" class="form-label">CPF</label>
+          <input
+            type="text"
+            id="cpf"
+            class="form-control"
+            placeholder="Digite o CPF"
+            formControlName="cpf"
+            [class.is-invalid]="
+              clienteForms.get('cpf')?.errors &&
+              clienteForms.get('cpf')?.touched
+            "
+            mask="000.000.000-00"
+          />
+          <div
+            *ngIf="clienteForms.get('cpf')?.hasError('maxlength')"
+            class="invalid-feedback"
+          >
+            O CPF não pode ter mais de 11 caracteres
+          </div>
+          <div
+            *ngIf="clienteForms.get('cpf')?.hasError('minlength')"
+            class="invalid-feedback"
+          >
+            O CPF não pode ter menos de 11 caracteres
+          </div>
+        </div>
+        <div class="col-md-8">
+          <label for="nome" class="form-label">Nome</label>
+          <input
+            type="text"
+            id="nome"
+            class="form-control"
+            placeholder="Digite o nome"
+            formControlName="nome"
+            [class.is-invalid]="
+              clienteForms.get('nome')?.errors &&
+              clienteForms.get('nome')?.touched
+            "
+          />
+          <div
+            *ngIf="clienteForms.get('nome')?.hasError('maxlength')"
+            class="invalid-feedback"
+          >
+            O Nome não pode ter mais de 200 caracteres
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <label for="cidade" class="form-label">Cidade</label>
+          <input
+            type="text"
+            id="cidade"
+            class="form-control"
+            placeholder="Nome da cidade"
+            formControlName="cidade"
+            [class.is-invalid]="
+              clienteForms.get('cidade')?.errors &&
+              clienteForms.get('cidade')?.touched
+            "
+          />
+          <div
+            *ngIf="clienteForms.get('cidade')?.hasError('maxlength')"
+            class="invalid-feedback"
+          >
+            A Cidade não pode ter mais de 50 caracteres
+          </div>
+        </div>
+        <div class="col-md-4">
+          <label for="bairro" class="form-label">Bairro</label>
+          <input
+            type="text"
+            id="bairro"
+            class="form-control"
+            placeholder="Nome do bairro"
+            formControlName="bairro"
+            [class.is-invalid]="
+              clienteForms.get('bairro')?.errors &&
+              clienteForms.get('bairro')?.touched
+            "
+          />
+          <div
+            *ngIf="clienteForms.get('bairro')?.hasError('maxlength')"
+            class="invalid-feedback"
+          >
+            O Bairro não pode ter mais de 50 caracteres
+          </div>
+        </div>
+        <div class="col-md-4">
+          <label for="telefoneFixo" class="form-label">Telefone Fixo</label>
+          <input
+            type="text"
+            id="telefoneFixo"
+            class="form-control"
+            placeholder="Digite o telefone fixo"
+            formControlName="telefoneFixo"
+            [class.is-invalid]="
+              clienteForms.get('telefoneFixo')?.errors &&
+              clienteForms.get('telefoneFixo')?.touched
+            "
+            mask="(00) 0000-0000"
+          />
+          <div
+            *ngIf="clienteForms.get('telefoneFixo')?.hasError('maxlength')"
+            class="invalid-feedback"
+          >
+            O Telefone fixo não pode ter mais de 10 caracteres
+          </div>
+          <div
+            *ngIf="clienteForms.get('telefoneFixo')?.hasError('minlength')"
+            class="invalid-feedback"
+          >
+            O Telefone fixo não pode ter menos de 10 caracteres
+          </div>
+        </div>
+        <div class="col-md-4">
+          <label for="telefoneCelular" class="form-label"
+            >Telefone Celular</label
+          >
+          <input
+            type="text"
+            id="telefoneCelular"
+            class="form-control"
+            placeholder="Digite o telefone celular"
+            formControlName="telefoneCelular"
+            [class.is-invalid]="
+              clienteForms.get('telefoneCelular')?.errors &&
+              clienteForms.get('telefoneCelular')?.touched
+            "
+            mask="(00) 0 0000-0000"
+          />
+          <div
+            *ngIf="clienteForms.get('telefoneCelular')?.hasError('maxlength')"
+            class="invalid-feedback"
+          >
+            O Telefone não pode ter mais de 11 caracteres
+          </div>
+          <div
+            *ngIf="clienteForms.get('telefoneCelular')?.hasError('minlength')"
+            class="invalid-feedback"
+          >
+            O Telefone não pode ter menos de 11 caracteres
+          </div>
+        </div>
+      </div>
+      <div class="col-md-12 mt-3">
+        <button (click)="filtrar()" class="btn btn-success">Filtrar</button>
+      </div>
+    </form>
+  </div>
+
   <div class="table-responsive">
     <table class="table">
       <thead>

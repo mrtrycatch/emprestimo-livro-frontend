@@ -52,6 +52,7 @@ export class UsuarioFormsComponent implements OnInit {
       ],
       password: ['', passwordValidators],
       isAdmin: [false],
+      ativo: [false],
     });
   }
 

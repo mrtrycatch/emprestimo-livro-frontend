@@ -135,6 +135,13 @@
       >
         {{ livro ? "Alterar" : "Incluir" }}
       </button>
+      <button
+        *ngIf="livro"
+        (click)="ExcluirLivro()"
+        class="btn btn-danger ms-2"
+      >
+        Excluir
+      </button>
     </div>
   </form>
 </div>

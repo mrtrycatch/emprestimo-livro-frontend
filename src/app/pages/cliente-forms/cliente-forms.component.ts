@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ClienteService } from '../../_services/cliente.service';
 import { ToastrService } from 'ngx-toastr';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-cliente-forms',
@@ -82,6 +83,28 @@ export class ClienteFormsComponent implements OnInit {
       next: (response) => {
         this.toastr.success(response.message);
       },
+    });
+  }
+
+  ExcluirCliente() {
+    Swal.fire({
+      title: 'Excluir Cliente',
+      text: 'Deseja realmente excluir esse cliente?',
+      icon: 'question',
+      showCancelButton: true,
+      cancelButtonText: 'Não',
+      confirmButtonText: 'Sim',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        if (this.cliente) {
+          this.clienteService.excluirCliente(this.cliente.id).subscribe({
+            next: (response) => {
+              this.toastr.success(response.message);
+              this.router.navigateByUrl('cliente');
+            },
+          });
+        }
+      }
     });
   }
 }

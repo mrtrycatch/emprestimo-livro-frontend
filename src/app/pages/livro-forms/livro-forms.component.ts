@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LivroService } from '../../_services/livro.service';
 import { ToastrService } from 'ngx-toastr';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-livro-forms',
@@ -67,5 +68,27 @@ export class LivroFormsComponent implements OnInit {
         },
       });
     }
+  }
+
+  ExcluirLivro() {
+    Swal.fire({
+      title: 'Excluir Livro',
+      text: 'Deseja realmente excluir esse livro?',
+      icon: 'question',
+      showCancelButton: true,
+      cancelButtonText: 'Não',
+      confirmButtonText: 'Sim',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        if (this.livro) {
+          this.livroService.excluirLivro(this.livro.id).subscribe({
+            next: (response) => {
+              this.toastr.success(response.message);
+              this.router.navigateByUrl('livro');
+            },
+          });
+        }
+      }
+    });
   }
 }

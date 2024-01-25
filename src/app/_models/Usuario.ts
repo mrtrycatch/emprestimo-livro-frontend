@@ -4,4 +4,5 @@ export interface Usuario {
   email: string;
   password?: string;
   isAdmin: boolean;
+  ativo: boolean;
 }

@@ -15,6 +15,7 @@
             clienteForms.get('cliCPF')?.errors &&
             clienteForms.get('cliCPF')?.touched
           "
+          mask="000.000.000-00"
         />
         <div
           *ngIf="clienteForms.get('cliCPF')?.hasError('required')"
@@ -177,6 +178,7 @@
             clienteForms.get('cliTelefoneFixo')?.errors &&
             clienteForms.get('cliTelefoneFixo')?.touched
           "
+          mask="(00) 0000-0000"
         />
         <div
           *ngIf="clienteForms.get('cliTelefoneFixo')?.hasError('required')"
@@ -209,6 +211,7 @@
             clienteForms.get('cliTelefoneCelular')?.errors &&
             clienteForms.get('cliTelefoneCelular')?.touched
           "
+          mask="(00) 0 0000-0000"
         />
         <div
           *ngIf="clienteForms.get('cliTelefoneCelular')?.hasError('required')"
@@ -237,6 +240,13 @@
         class="btn btn-success"
       >
         {{ cliente ? "Alterar" : "Incluir" }}
+      </button>
+      <button
+        *ngIf="cliente"
+        (click)="ExcluirCliente()"
+        class="btn btn-danger ms-2"
+      >
+        Excluir
       </button>
     </div>
   </form>

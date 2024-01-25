@@ -52,4 +52,39 @@ export class LivroService {
       })
     );
   }
+
+  excluirLivro(id: number) {
+    return this.http.delete<any>(this.baseUrl + 'livro/' + id).pipe(
+      map((response) => {
+        return response;
+      })
+    );
+  }
+
+  pesquisarLivro(termo: string, page: number, itemsPerPage: number) {
+    let params = new HttpParams();
+    if (page && itemsPerPage) {
+      params = params.append('termo', termo);
+      params = params.append('pageNumber', page);
+      params = params.append('pageSize', itemsPerPage);
+    }
+    return this.http
+      .get<any>(this.baseUrl + 'livro/pesquisar', {
+        observe: 'response',
+        params,
+      })
+      .pipe(
+        map((response) => {
+          if (response.body) {
+            this.paginatedResult.result = response.body;
+          }
+          const pagination = response.headers.get('Pagination');
+          if (pagination) {
+            this.paginatedResult.pagination = JSON.parse(pagination);
+          }
+
+          return this.paginatedResult;
+        })
+      );
+  }
 }

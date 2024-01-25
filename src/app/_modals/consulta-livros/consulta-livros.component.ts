@@ -1,6 +1,8 @@
 import { Component, EventEmitter, OnInit } from '@angular/core';
 import { BsModalRef } from 'ngx-bootstrap/modal';
 import { Livro } from '../../_models/Livro';
+import { LivroService } from '../../_services/livro.service';
+import { Pagination } from '../../_models/Pagination';
 
 @Component({
   selector: 'app-consulta-livros',
@@ -10,38 +12,19 @@ import { Livro } from '../../_models/Livro';
 export class ConsultaLivrosComponent implements OnInit {
   consultaLivro: string = '';
   onClose: EventEmitter<any> = new EventEmitter();
-  livros: Livro[] = [
-    {
-      id: 1,
-      livroNome: 'Pinóquio',
-      livroAutor: 'Carlo Collodi',
-      livroEditora: 'Editolandia',
-      livroAnoPublicacao: '2024-01-06T00:00:00',
-      livroEdicao: '1',
-    },
-    {
-      id: 6,
-      livroNome: 'A estratégia do oceano azul',
-      livroAutor: 'Renée Mauborgne',
-      livroEditora: 'Actual',
-      livroAnoPublicacao: '2006-01-01T00:00:00',
-      livroEdicao: '1',
-    },
-    {
-      id: 7,
-      livroNome: 'Os segredos da mente milionária',
-      livroAutor: 'T. Harv Eker',
-      livroEditora: 'Sextante',
-      livroAnoPublicacao: '2009-01-01T00:00:00',
-      livroEdicao: '1',
-    },
-  ];
+  page: number = 1;
+  itemsPerPage: number = 10;
+  pagination: Pagination | undefined;
+  livros: Livro[] = [];
 
   ngOnInit(): void {
-    console.log(this.consultaLivro);
+    this.consultarLivros();
   }
 
-  constructor(private bsModalRef: BsModalRef) {}
+  constructor(
+    private bsModalRef: BsModalRef,
+    private livroService: LivroService
+  ) {}
 
   fecharModal() {
     this.bsModalRef.hide();
@@ -50,5 +33,24 @@ export class ConsultaLivrosComponent implements OnInit {
   adicionarLivro(livro: Livro) {
     this.onClose.emit(livro);
     this.fecharModal();
+  }
+
+  consultarLivros() {
+    this.livroService
+      .pesquisarLivro(this.consultaLivro, this.page, this.itemsPerPage)
+      .subscribe({
+        next: (response) => {
+          if (response.result && response.pagination) {
+            this.livros = response.result;
+            this.pagination = response.pagination;
+          }
+        },
+      });
+  }
+  pageChanged(event: any) {
+    if (this.page !== event.page) {
+      this.page = event.page;
+      this.consultarLivros();
+    }
   }
 }
