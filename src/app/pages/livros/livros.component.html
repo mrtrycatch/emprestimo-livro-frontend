@@ -4,6 +4,117 @@
   <button routerLink="/livro/create" class="btn btn-sm btn-primary">
     <i class="fa fa-plus"></i> Novo Livro
   </button>
+  <button
+    type="button"
+    class="btn btn-sm btn-primary ms-2"
+    (click)="isCollapsed = !isCollapsed"
+    [attr.aria-expanded]="!isCollapsed"
+    aria-controls="collapseBasic"
+  >
+    Filtrar
+  </button>
+  <div id="collapseBasic" [collapse]="isCollapsed" [isAnimated]="true">
+    <form [formGroup]="livroForm">
+      <div class="row g-3">
+        <div class="col-md-4">
+          <label for="nome" class="form-label">Nome</label>
+          <input
+            type="text"
+            id="nome"
+            class="form-control"
+            placeholder="Digite o nome do livro"
+            formControlName="nome"
+            [class.is-invalid]="
+              livroForm.get('nome')?.errors && livroForm.get('nome')?.touched
+            "
+          />
+          <div
+            *ngIf="livroForm.get('nome')?.hasError('maxlength')"
+            class="invalid-feedback"
+          >
+            O nome não pode ter mais de 50 caracteres
+          </div>
+        </div>
+        <div class="col-md-8">
+          <label for="autor" class="form-label">Autor</label>
+          <input
+            type="text"
+            id="autor"
+            class="form-control"
+            placeholder="Digite o nome do autor"
+            formControlName="autor"
+            [class.is-invalid]="
+              livroForm.get('autor')?.errors && livroForm.get('autor')?.touched
+            "
+          />
+          <div
+            *ngIf="livroForm.get('autor')?.hasError('maxlength')"
+            class="invalid-feedback"
+          >
+            O nome do autor não pode ter mais de 200 caracteres
+          </div>
+        </div>
+        <div class="col-md-6">
+          <label for="editora" class="form-label">Editora</label>
+          <input
+            type="text"
+            id="editora"
+            class="form-control"
+            placeholder="Digite o nome da editora"
+            formControlName="editora"
+            [class.is-invalid]="
+              livroForm.get('editora')?.errors &&
+              livroForm.get('editora')?.touched
+            "
+          />
+          <div
+            *ngIf="livroForm.get('editora')?.hasError('maxlength')"
+            class="invalid-feedback"
+          >
+            O nome da editora não pode ter mais de 50 caracteres
+          </div>
+        </div>
+        <div class="col-md-4">
+          <label for="anoPublicacao" class="form-label"
+            >Ano de publicação</label
+          >
+          <input
+            type="date"
+            id="anoPublicacao"
+            class="form-control"
+            formControlName="anoPublicacao"
+            [class.is-invalid]="
+              livroForm.get('anoPublicacao')?.errors &&
+              livroForm.get('anoPublicacao')?.touched
+            "
+          />
+        </div>
+        <div class="col-md-2">
+          <label for="edicao" class="form-label">Edição</label>
+          <input
+            type="text"
+            id="edicao"
+            class="form-control"
+            placeholder="Edição"
+            formControlName="edicao"
+            [class.is-invalid]="
+              livroForm.get('edicao')?.errors &&
+              livroForm.get('edicao')?.touched
+            "
+          />
+          <div
+            *ngIf="livroForm.get('edicao')?.hasError('maxlength')"
+            class="invalid-feedback"
+          >
+            A edição do livro não pode ter mais de 50 caracteres
+          </div>
+        </div>
+      </div>
+      <div class="col-md-12 mt-3">
+        <button (click)="filtrar()" class="btn btn-success">Filtrar</button>
+      </div>
+    </form>
+  </div>
   <div class="table-responsive">
     <table class="table">
       <thead>

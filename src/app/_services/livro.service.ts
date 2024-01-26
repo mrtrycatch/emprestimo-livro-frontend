@@ -4,6 +4,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Livro } from '../_models/Livro';
 import { PaginatedResult } from '../_models/Pagination';
 import { map } from 'rxjs';
+import { FiltroLivro } from '../_models/FiltroLivro';
 
 @Injectable({
   providedIn: 'root',
@@ -70,6 +71,37 @@ export class LivroService {
     }
     return this.http
       .get<any>(this.baseUrl + 'livro/pesquisar', {
+        observe: 'response',
+        params,
+      })
+      .pipe(
+        map((response) => {
+          if (response.body) {
+            this.paginatedResult.result = response.body;
+          }
+          const pagination = response.headers.get('Pagination');
+          if (pagination) {
+            this.paginatedResult.pagination = JSON.parse(pagination);
+          }
+
+          return this.paginatedResult;
+        })
+      );
+  }
+
+  filtrarLivro(filtroLivro: FiltroLivro) {
+    let params = new HttpParams();
+    if (filtroLivro.pageNumber && filtroLivro.pageSize) {
+      params = params.append('nome', filtroLivro.nome);
+      params = params.append('autor', filtroLivro.autor);
+      params = params.append('editora', filtroLivro.editora);
+      params = params.append('anoPublicacao', filtroLivro.anoPublicacao);
+      params = params.append('edicao', filtroLivro.edicao);
+      params = params.append('pageNumber', filtroLivro.pageNumber);
+      params = params.append('pageSize', filtroLivro.pageSize);
+    }
+    return this.http
+      .get<any>(this.baseUrl + 'livro/filtrar', {
         observe: 'response',
         params,
       })

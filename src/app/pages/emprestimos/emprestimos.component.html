@@ -4,6 +4,159 @@
   <button routerLink="/emprestimo" class="btn btn-sm btn-primary">
     <i class="fa fa-plus"></i> Novo empréstimo
   </button>
+  <button
+    type="button"
+    class="btn btn-sm btn-primary ms-2"
+    (click)="isCollapsed = !isCollapsed"
+    [attr.aria-expanded]="!isCollapsed"
+    aria-controls="collapseBasic"
+  >
+    Filtrar
+  </button>
+  <div id="collapseBasic" [collapse]="isCollapsed" [isAnimated]="true">
+    <form class="mt-3" [formGroup]="emprestimoForm">
+      <div class="row g-3">
+        <div class="col-md-4">
+          <label for="cpf" class="form-label">CPF</label>
+          <input
+            type="text"
+            id="cpf"
+            class="form-control"
+            placeholder="Digite o CPF"
+            formControlName="cpf"
+            [class.is-invalid]="
+              emprestimoForm.get('cpf')?.errors &&
+              emprestimoForm.get('cpf')?.touched
+            "
+            mask="000.000.000-00"
+          />
+          <div
+            *ngIf="emprestimoForm.get('cpf')?.hasError('maxlength')"
+            class="invalid-feedback"
+          >
+            O CPF não pode ter mais de 11 caracteres
+          </div>
+          <div
+            *ngIf="emprestimoForm.get('cpf')?.hasError('minlength')"
+            class="invalid-feedback"
+          >
+            O CPF não pode ter menos de 11 caracteres
+          </div>
+        </div>
+        <div class="col-md-8">
+          <label for="nome" class="form-label">Nome</label>
+          <input
+            type="text"
+            id="nome"
+            class="form-control"
+            placeholder="Digite o nome"
+            formControlName="nome"
+            [class.is-invalid]="
+              emprestimoForm.get('nome')?.errors &&
+              emprestimoForm.get('nome')?.touched
+            "
+          />
+          <div
+            *ngIf="emprestimoForm.get('nome')?.hasError('maxlength')"
+            class="invalid-feedback"
+          >
+            O Nome não pode ter mais de 250 caracteres
+          </div>
+        </div>
+        <div class="col-md-3">
+          <label for="anoPublicacao" class="form-label"
+            >Data Empréstimo Início</label
+          >
+          <input
+            type="date"
+            id="anoPublicacao"
+            class="form-control"
+            formControlName="dataEmprestimoInicio"
+            [class.is-invalid]="
+              emprestimoForm.get('dataEmprestimoInicio')?.errors &&
+              emprestimoForm.get('dataEmprestimoInicio')?.touched
+            "
+          />
+        </div>
+        <div class="col-md-3">
+          <label for="anoPublicacao" class="form-label"
+            >Data Empréstimo Fim</label
+          >
+          <input
+            type="date"
+            id="anoPublicacao"
+            class="form-control"
+            formControlName="dataEmprestimoFim"
+            [class.is-invalid]="
+              emprestimoForm.get('dataEmprestimoFim')?.errors &&
+              emprestimoForm.get('dataEmprestimoFim')?.touched
+            "
+          />
+        </div>
+        <div class="col-md-3">
+          <label for="anoPublicacao" class="form-label"
+            >Data Entrega Início</label
+          >
+          <input
+            type="date"
+            id="anoPublicacao"
+            class="form-control"
+            formControlName="dataEntregaInicio"
+            [class.is-invalid]="
+              emprestimoForm.get('dataEntregaInicio')?.errors &&
+              emprestimoForm.get('dataEntregaInicio')?.touched
+            "
+          />
+        </div>
+        <div class="col-md-3">
+          <label for="anoPublicacao" class="form-label">Data Entrega Fim</label>
+          <input
+            type="date"
+            id="anoPublicacao"
+            class="form-control"
+            formControlName="dataEntregaFim"
+            [class.is-invalid]="
+              emprestimoForm.get('dataEntregaFim')?.errors &&
+              emprestimoForm.get('dataEntregaFim')?.touched
+            "
+          />
+        </div>
+        <div class="col-md-4 d-flex flex-column justify-content-end">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-check">
+                <label for="entregue" class="form-check-label">
+                  Entregue
+                </label>
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  id="entregue"
+                  formControlName="entregue"
+                />
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-check">
+                <label for="naoEntregue" class="form-check-label">
+                  Não Entregue
+                </label>
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  id="naoEntregue"
+                  formControlName="naoEntregue"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-12 mt-3">
+          <button (click)="filtrar()" class="btn btn-success">filtrar</button>
+        </div>
+      </div>
+    </form>
+  </div>
   <div class="table-responsive">
     <table class="table">
       <thead>

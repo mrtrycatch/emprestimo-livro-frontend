@@ -6,6 +6,7 @@ import { map } from 'rxjs';
 import { EmprestimoGet } from '../_models/EmprestimoGet';
 import { PaginatedResult } from '../_models/Pagination';
 import { EmprestimoPut } from '../_models/EmprestimoPut';
+import { FiltroEmprestimo } from '../_models/FiltroEmprestimo';
 
 @Injectable({
   providedIn: 'root',
@@ -42,6 +43,50 @@ export class EmprestimoService {
 
     return this.http
       .get<EmprestimoGet[]>(this.baseUrl + 'emprestimo', {
+        observe: 'response',
+        params,
+      })
+      .pipe(
+        map((response) => {
+          if (response.body) {
+            this.paginatedResult.result = response.body;
+          }
+          const pagination = response.headers.get('Pagination');
+          if (pagination) {
+            this.paginatedResult.pagination = JSON.parse(pagination);
+          }
+
+          return this.paginatedResult;
+        })
+      );
+  }
+
+  filtrarEmprestimos(filtroEmprestimo: FiltroEmprestimo) {
+    let params = new HttpParams();
+    if (filtroEmprestimo.pageNumber && filtroEmprestimo.pageSize) {
+      params = params.append('cpf', filtroEmprestimo.cpf);
+      params = params.append('nome', filtroEmprestimo.nome);
+      params = params.append(
+        'dataEmprestimoInicio',
+        filtroEmprestimo.dataEmprestimoInicio
+      );
+      params = params.append(
+        'dataEmprestimoFim',
+        filtroEmprestimo.dataEmprestimoFim
+      );
+      params = params.append(
+        'dataEntregaInicio',
+        filtroEmprestimo.dataEntregaInicio
+      );
+      params = params.append('dataEntregaFim', filtroEmprestimo.dataEntregaFim);
+      params = params.append('entregue', filtroEmprestimo.entregue);
+      params = params.append('naoEntregue', filtroEmprestimo.naoEntregue);
+      params = params.append('pageNumber', filtroEmprestimo.pageNumber);
+      params = params.append('pageSize', filtroEmprestimo.pageSize);
+    }
+
+    return this.http
+      .get<any>(this.baseUrl + 'emprestimo/filtrar', {
         observe: 'response',
         params,
       })
