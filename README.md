@@ -1,3 +1,8 @@
+# Sobre o Projeto
+
+Esse projeto é o material do curso Desenvolvimento Web Em Angular: Do Zero à publicação.
+Link do curso: https://rotadodev.com.br/
+
 # EmprestimoLivroFrontend
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.0.3.
