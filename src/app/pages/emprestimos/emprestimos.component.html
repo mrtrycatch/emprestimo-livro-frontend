@@ -152,7 +152,19 @@
           </div>
         </div>
         <div class="col-md-12 mt-3">
-          <button (click)="filtrar()" class="btn btn-success">filtrar</button>
+          <button
+            [disabled]="!emprestimoForm.valid"
+            (click)="filtrar()"
+            class="btn btn-success"
+          >
+            filtrar
+          </button>
+          <button
+            (click)="selecionarEmprestimos(); emprestimoForm.reset()"
+            class="btn btn-primary ms-2"
+          >
+            Desfazer filtro
+          </button>
         </div>
       </div>
     </form>

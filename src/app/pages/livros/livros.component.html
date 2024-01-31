@@ -111,7 +111,19 @@
         </div>
       </div>
       <div class="col-md-12 mt-3">
-        <button (click)="filtrar()" class="btn btn-success">Filtrar</button>
+        <button
+          [disabled]="!livroForm.valid"
+          (click)="filtrar()"
+          class="btn btn-success"
+        >
+          Filtrar
+        </button>
+        <button
+          (click)="selecionarLivros(); livroForm.reset()"
+          class="btn btn-primary ms-2"
+        >
+          Desfazer filtro
+        </button>
       </div>
     </form>
   </div>

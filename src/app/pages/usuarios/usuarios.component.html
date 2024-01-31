@@ -4,6 +4,135 @@
   <button routerLink="/usuario/create" class="btn btn-sm btn-primary">
     <i class="fa fa-plus"></i> Novo Usuário
   </button>
+  <button
+    type="button"
+    class="btn btn-sm btn-primary ms-2"
+    (click)="isCollapsed = !isCollapsed"
+    [attr.aria-expanded]="!isCollapsed"
+    aria-controls="collapseBasic"
+  >
+    Filtrar
+  </button>
+  <div id="collapseBasic" [collapse]="isCollapsed" [isAnimated]="true">
+    <form [formGroup]="usuarioForms">
+      <div class="row g-3">
+        <div class="col-md-8">
+          <label for="nome" class="form-label">Nome</label>
+          <input
+            type="text"
+            id="nome"
+            class="form-control"
+            [class.is-invalid]="
+              usuarioForms.get('nome')?.errors &&
+              usuarioForms.get('nome')?.touched
+            "
+            placeholder="Digite o nome do usuário"
+            formControlName="nome"
+          />
+          <div
+            *ngIf="usuarioForms.get('nome')?.hasError('maxlength')"
+            class="invalid-feedback"
+          >
+            O nome não pode ter mais de 250 caracteres
+          </div>
+        </div>
+        <div class="col-md-4">
+          <label for="email" class="form-label">E-mail</label>
+          <input
+            type="email"
+            id="email"
+            class="form-control"
+            [class.is-invalid]="
+              usuarioForms.get('email')?.errors &&
+              usuarioForms.get('email')?.touched
+            "
+            placeholder="Digite o e-mail do usuário"
+            formControlName="email"
+          />
+          <div
+            *ngIf="usuarioForms.get('email')?.hasError('maxlength')"
+            class="invalid-feedback"
+          >
+            O e-mail não pode ter mais de 250 caracteres
+          </div>
+          <div
+            *ngIf="usuarioForms.get('email')?.hasError('email')"
+            class="invalid-feedback"
+          >
+            O e-mail é inválido
+          </div>
+        </div>
+
+        <div class="col-md-12 d-flex flex-column justify-content-end">
+          <div class="row">
+            <div class="col-md-3">
+              <div class="form-check">
+                <label for="isAdmin" class="form-check-label">
+                  É Administrador
+                </label>
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  id="isAdmin"
+                  formControlName="isAdmin"
+                />
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="form-check">
+                <label for="isNotAdmin" class="form-check-label">
+                  Não é Administrador
+                </label>
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  id="isNotAdmin"
+                  formControlName="isNotAdmin"
+                />
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="form-check">
+                <label for="ativo" class="form-check-label"> Ativo </label>
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  id="ativo"
+                  formControlName="ativo"
+                />
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="form-check">
+                <label for="inativo" class="form-check-label"> Inativo </label>
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  id="inativo"
+                  formControlName="inativo"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-12 mt-3">
+        <button
+          [disabled]="!usuarioForms.valid"
+          (click)="filtrar()"
+          class="btn btn-success"
+        >
+          Filtrar
+        </button>
+        <button
+          (click)="selecionarUsuarios(); usuarioForms.reset()"
+          class="btn btn-primary ms-2"
+        >
+          Desfazer filtro
+        </button>
+      </div>
+    </form>
+  </div>
   <div class="table-responsive">
     <table class="table">
       <thead>

@@ -67,6 +67,9 @@ export class EmprestimoComponent implements OnInit {
   }
 
   abrirConsultaCliente() {
+    if (!this.consultaCliente) {
+      return;
+    }
     const initialState = {
       consultaCliente: this.consultaCliente,
     };
@@ -77,9 +80,14 @@ export class EmprestimoComponent implements OnInit {
     this.bsModalRef?.content.onClose.subscribe((result: Cliente) => {
       this.cliente = result;
     });
+
+    this.consultaCliente = '';
   }
 
   abrirConsultaLivro() {
+    if (!this.consultaLivro) {
+      return;
+    }
     const initialState = {
       consultaLivro: this.consultaLivro,
     };
@@ -95,6 +103,8 @@ export class EmprestimoComponent implements OnInit {
         this.livros.push(result);
       }
     });
+
+    this.consultaLivro = '';
   }
 
   removerCliente() {

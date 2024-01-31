@@ -6,6 +6,7 @@ import { environment } from '../../environments/environment';
 import { Login } from '../_models/Login';
 import { UserToken } from '../_models/UserToken';
 import { PaginatedResult } from '../_models/Pagination';
+import { FiltroUsuario } from '../_models/FiltroUsuario';
 
 @Injectable({
   providedIn: 'root',
@@ -82,6 +83,39 @@ export class UsuarioService {
         return response;
       })
     );
+  }
+
+  filtrarUsuarios(filtroUsuario: FiltroUsuario) {
+    let params = new HttpParams();
+    if (filtroUsuario.pageNumber && filtroUsuario.pageSize) {
+      params = params.append('nome', filtroUsuario.nome);
+      params = params.append('email', filtroUsuario.email);
+      params = params.append('isAdmin', filtroUsuario.isAdmin);
+      params = params.append('isNotAdmin', filtroUsuario.isNotAdmin);
+      params = params.append('ativo', filtroUsuario.ativo);
+      params = params.append('inativo', filtroUsuario.inativo);
+      params = params.append('pageNumber', filtroUsuario.pageNumber);
+      params = params.append('pageSize', filtroUsuario.pageSize);
+    }
+
+    return this.http
+      .get<Usuario[]>(this.baseUrl + 'usuario/filtrar', {
+        observe: 'response',
+        params,
+      })
+      .pipe(
+        map((response) => {
+          if (response.body) {
+            this.paginatedResult.result = response.body;
+          }
+          const pagination = response.headers.get('Pagination');
+          if (pagination) {
+            this.paginatedResult.pagination = JSON.parse(pagination);
+          }
+
+          return this.paginatedResult;
+        })
+      );
   }
 
   isAdmin() {

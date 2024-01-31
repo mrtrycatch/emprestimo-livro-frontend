@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserToken } from './_models/UserToken';
 import { UsuarioService } from './_services/usuario.service';
+import { environment } from '../environments/environment';
 
 @Component({
   selector: 'app-root',
@@ -14,6 +15,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     this.setUsuarioAtual();
+    console.log(environment.apiUrl);
   }
 
   setUsuarioAtual() {
